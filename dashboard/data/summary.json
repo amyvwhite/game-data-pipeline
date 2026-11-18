@@ -1,8 +1,9 @@
 {
-  "generated_at": "2026-11-18T19:05:38+00:00",
+  "generated_at": "2026-11-18T20:20:54+00:00",
   "run_date": "2026-11-18",
   "is_sample": false,
   "groups": {
+    "-6": "Take-Two",
     "3240220": "Take-Two",
     "271590": "Take-Two",
     "1174180": "Take-Two",
@@ -16,9 +17,9 @@
     "1091500": "Competitor"
   },
   "coverage": {
-    "snapshots": 36,
+    "snapshots": 47,
     "first_snapshot": "2026-11-18T18:14:57.195867+00:00",
-    "last_snapshot": "2026-11-18T19:05:16.836739+00:00",
+    "last_snapshot": "2026-11-18T20:20:40.573391+00:00",
     "days_collected": 1
   },
   "daily_players": [
@@ -26,77 +27,77 @@
       "app_id": 271590,
       "name": "Grand Theft Auto V Legacy",
       "snapshot_date": "2026-11-18",
-      "avg_players": 68094.3,
+      "avg_players": 66663.2,
       "max_players": 68513
     },
     {
       "app_id": 289070,
       "name": "Sid Meier\u2019s Civilization\u00ae VI",
       "snapshot_date": "2026-11-18",
-      "avg_players": 22953.0,
+      "avg_players": 22887.6,
       "max_players": 23220
     },
     {
       "app_id": 1091500,
       "name": "Cyberpunk 2077",
       "snapshot_date": "2026-11-18",
-      "avg_players": 72515.0,
-      "max_players": 72515
+      "avg_players": 72883.0,
+      "max_players": 73619
     },
     {
       "app_id": 1174180,
       "name": "Red Dead Redemption 2",
       "snapshot_date": "2026-11-18",
-      "avg_players": 26265.0,
+      "avg_players": 26133.6,
       "max_players": 26532
     },
     {
       "app_id": 1285190,
       "name": "Borderlands 4",
       "snapshot_date": "2026-11-18",
-      "avg_players": 3708.8,
-      "max_players": 3824
+      "avg_players": 3772.4,
+      "max_players": 4027
     },
     {
       "app_id": 1295660,
       "name": "Sid Meier's Civilization VII",
       "snapshot_date": "2026-11-18",
-      "avg_players": 7435.8,
-      "max_players": 7484
+      "avg_players": 7501.0,
+      "max_players": 7762
     },
     {
       "app_id": 1938090,
       "name": "Call of Duty\u00ae",
       "snapshot_date": "2026-11-18",
-      "avg_players": 102669.0,
-      "max_players": 102669
+      "avg_players": 103652.3,
+      "max_players": 105619
     },
     {
       "app_id": 3159330,
       "name": "Assassin\u2019s Creed Shadows",
       "snapshot_date": "2026-11-18",
-      "avg_players": 1861.0,
+      "avg_players": 1816.7,
       "max_players": 1861
     },
     {
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
       "snapshot_date": "2026-11-18",
-      "avg_players": 64501.3,
+      "avg_players": 64257.0,
       "max_players": 64855
     },
     {
       "app_id": 3405690,
       "name": "EA SPORTS FC\u2122 26",
       "snapshot_date": "2026-11-18",
-      "avg_players": 20583.5,
+      "avg_players": 20215.7,
       "max_players": 20635
     },
     {
       "app_id": 3472040,
       "name": "NBA 2K26",
       "snapshot_date": "2026-11-18",
-      "avg_players": 4550.3,
+      "avg_players": 4363.4,
       "max_players": 4884
     }
   ],
@@ -328,15 +329,15 @@
     {
       "snapshot_date": "2026-11-18",
       "publisher_group": "Competitor",
-      "avg_players": 197629.0,
-      "share_pct": 50.0,
+      "avg_players": 198568.0,
+      "share_pct": 50.4,
       "rank_that_day": 1
     },
     {
       "snapshot_date": "2026-11-18",
       "publisher_group": "Take-Two",
-      "avg_players": 197509.0,
-      "share_pct": 50.0,
+      "avg_players": 195578.0,
+      "share_pct": 49.6,
       "rank_that_day": 2
     }
   ],
@@ -354,6 +355,12 @@
       "samples": 1
     },
     {
+      "app_id": 271590,
+      "local_hour": 15,
+      "avg_players": 60939.0,
+      "samples": 1
+    },
+    {
       "app_id": 289070,
       "local_hour": 13,
       "avg_players": 23114.0,
@@ -366,6 +373,12 @@
       "samples": 1
     },
     {
+      "app_id": 289070,
+      "local_hour": 15,
+      "avg_players": 22626.0,
+      "samples": 1
+    },
+    {
       "app_id": 1091500,
       "local_hour": 13,
       "avg_players": 72515.0,
@@ -375,6 +388,12 @@
       "app_id": 1091500,
       "local_hour": 14,
       "avg_players": 72515.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1091500,
+      "local_hour": 15,
+      "avg_players": 73619.0,
       "samples": 1
     },
     {
@@ -390,6 +409,12 @@
       "samples": 1
     },
     {
+      "app_id": 1174180,
+      "local_hour": 15,
+      "avg_players": 25608.0,
+      "samples": 1
+    },
+    {
       "app_id": 1285190,
       "local_hour": 13,
       "avg_players": 3670.0,
@@ -399,6 +424,12 @@
       "app_id": 1285190,
       "local_hour": 14,
       "avg_players": 3824.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1285190,
+      "local_hour": 15,
+      "avg_players": 4027.0,
       "samples": 1
     },
     {
@@ -414,6 +445,12 @@
       "samples": 1
     },
     {
+      "app_id": 1295660,
+      "local_hour": 15,
+      "avg_players": 7762.0,
+      "samples": 1
+    },
+    {
       "app_id": 1938090,
       "local_hour": 13,
       "avg_players": 102669.0,
@@ -426,6 +463,12 @@
       "samples": 1
     },
     {
+      "app_id": 1938090,
+      "local_hour": 15,
+      "avg_players": 105619.0,
+      "samples": 1
+    },
+    {
       "app_id": 3159330,
       "local_hour": 13,
       "avg_players": 1861.0,
@@ -435,6 +478,12 @@
       "app_id": 3159330,
       "local_hour": 14,
       "avg_players": 1861.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3159330,
+      "local_hour": 15,
+      "avg_players": 1728.0,
       "samples": 1
     },
     {
@@ -450,6 +499,12 @@
       "samples": 1
     },
     {
+      "app_id": 3240220,
+      "local_hour": 15,
+      "avg_players": 63280.0,
+      "samples": 1
+    },
+    {
       "app_id": 3405690,
       "local_hour": 13,
       "avg_players": 20635.0,
@@ -459,6 +514,12 @@
       "app_id": 3405690,
       "local_hour": 14,
       "avg_players": 20532.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3405690,
+      "local_hour": 15,
+      "avg_players": 19480.0,
       "samples": 1
     },
     {
@@ -472,53 +533,59 @@
       "local_hour": 14,
       "avg_players": 4296.0,
       "samples": 1
+    },
+    {
+      "app_id": 3472040,
+      "local_hour": 15,
+      "avg_players": 3616.0,
+      "samples": 1
     }
   ],
   "peak_hours": [
     {
       "app_id": 1938090,
       "name": "Call of Duty\u00ae",
-      "peak_hour_toronto": 14,
-      "peak_avg_players": 102669.0,
-      "quiet_hour_toronto": 14,
+      "peak_hour_toronto": 15,
+      "peak_avg_players": 105619.0,
+      "quiet_hour_toronto": 13,
       "quiet_avg_players": 102669.0,
-      "snapshots_used": 2.0
+      "snapshots_used": 3.0
     },
     {
       "app_id": 1091500,
       "name": "Cyberpunk 2077",
-      "peak_hour_toronto": 13,
-      "peak_avg_players": 72515.0,
-      "quiet_hour_toronto": 14,
+      "peak_hour_toronto": 15,
+      "peak_avg_players": 73619.0,
+      "quiet_hour_toronto": 13,
       "quiet_avg_players": 72515.0,
-      "snapshots_used": 2.0
+      "snapshots_used": 3.0
     },
     {
       "app_id": 271590,
       "name": "Grand Theft Auto V Legacy",
       "peak_hour_toronto": 13,
       "peak_avg_players": 68241.0,
-      "quiet_hour_toronto": 14,
-      "quiet_avg_players": 67655.0,
-      "snapshots_used": 4.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 60939.0,
+      "snapshots_used": 5.0
     },
     {
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
       "peak_hour_toronto": 14,
       "peak_avg_players": 64784.0,
-      "quiet_hour_toronto": 13,
-      "quiet_avg_players": 64407.0,
-      "snapshots_used": 4.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 63280.0,
+      "snapshots_used": 5.0
     },
     {
       "app_id": 1174180,
       "name": "Red Dead Redemption 2",
       "peak_hour_toronto": 13,
       "peak_avg_players": 26307.0,
-      "quiet_hour_toronto": 14,
-      "quiet_avg_players": 26140.0,
-      "snapshots_used": 4.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 25608.0,
+      "snapshots_used": 5.0
     },
     {
       "app_id": 289070,
@@ -527,52 +594,52 @@
       "peak_avg_players": 23114.0,
       "quiet_hour_toronto": 14,
       "quiet_avg_players": 22471.0,
-      "snapshots_used": 4.0
+      "snapshots_used": 5.0
     },
     {
       "app_id": 3405690,
       "name": "EA SPORTS FC\u2122 26",
       "peak_hour_toronto": 13,
       "peak_avg_players": 20635.0,
-      "quiet_hour_toronto": 14,
-      "quiet_avg_players": 20532.0,
-      "snapshots_used": 2.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 19480.0,
+      "snapshots_used": 3.0
     },
     {
       "app_id": 1295660,
       "name": "Sid Meier's Civilization VII",
-      "peak_hour_toronto": 14,
-      "peak_avg_players": 7484.0,
+      "peak_hour_toronto": 15,
+      "peak_avg_players": 7762.0,
       "quiet_hour_toronto": 13,
       "quiet_avg_players": 7420.0,
-      "snapshots_used": 4.0
+      "snapshots_used": 5.0
     },
     {
       "app_id": 3472040,
       "name": "NBA 2K26",
       "peak_hour_toronto": 13,
       "peak_avg_players": 4635.0,
-      "quiet_hour_toronto": 14,
-      "quiet_avg_players": 4296.0,
-      "snapshots_used": 4.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 3616.0,
+      "snapshots_used": 5.0
     },
     {
       "app_id": 1285190,
       "name": "Borderlands 4",
-      "peak_hour_toronto": 14,
-      "peak_avg_players": 3824.0,
+      "peak_hour_toronto": 15,
+      "peak_avg_players": 4027.0,
       "quiet_hour_toronto": 13,
       "quiet_avg_players": 3670.0,
-      "snapshots_used": 4.0
+      "snapshots_used": 5.0
     },
     {
       "app_id": 3159330,
       "name": "Assassin\u2019s Creed Shadows",
-      "peak_hour_toronto": 13,
+      "peak_hour_toronto": 14,
       "peak_avg_players": 1861.0,
-      "quiet_hour_toronto": 13,
-      "quiet_avg_players": 1861.0,
-      "snapshots_used": 2.0
+      "quiet_hour_toronto": 15,
+      "quiet_avg_players": 1728.0,
+      "snapshots_used": 3.0
     }
   ],
   "sale_impact": [],
@@ -580,6 +647,11 @@
   "twitch_daily": [],
   "twitch_vs_players": [],
   "recent_runs": [
+    {
+      "finished_at": "2026-11-18T20:20:54.692177+00:00",
+      "status": "success",
+      "rows_loaded": 22
+    },
     {
       "finished_at": "2026-11-18T19:05:38.945067+00:00",
       "status": "success",
@@ -599,6 +671,78 @@
       "finished_at": "2026-11-18T18:15:41.113546+00:00",
       "status": "failed",
       "rows_loaded": 0
+    }
+  ],
+  "launch_watch": [
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 271590,
+      "name": "Grand Theft Auto V Legacy",
+      "after_launch": false,
+      "avg_players": 66663.0,
+      "pre_launch_avg": 66663.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "after_launch": false,
+      "avg_players": 64257.0,
+      "pre_launch_avg": 64257.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "after_launch": false,
+      "avg_players": 26134.0,
+      "pre_launch_avg": 26134.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 289070,
+      "name": "Sid Meier's Civilization VI",
+      "after_launch": false,
+      "avg_players": 22888.0,
+      "pre_launch_avg": 22888.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 1295660,
+      "name": "Sid Meier's Civilization VII",
+      "after_launch": false,
+      "avg_players": 7501.0,
+      "pre_launch_avg": 7501.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 3472040,
+      "name": "NBA 2K26",
+      "after_launch": false,
+      "avg_players": 4363.0,
+      "pre_launch_avg": 4363.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "after_launch": false,
+      "avg_players": 3772.0,
+      "pre_launch_avg": 3772.0,
+      "change_vs_pre_launch_pct": 0.0,
+      "gta6_twitch_viewers": null
     }
   ]
 }
