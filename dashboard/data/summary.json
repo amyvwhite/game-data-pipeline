@@ -1,0 +1,604 @@
+{
+  "generated_at": "2026-11-18T19:05:38+00:00",
+  "run_date": "2026-11-18",
+  "is_sample": false,
+  "groups": {
+    "3240220": "Take-Two",
+    "271590": "Take-Two",
+    "1174180": "Take-Two",
+    "3472040": "Take-Two",
+    "1285190": "Take-Two",
+    "289070": "Take-Two",
+    "1295660": "Take-Two",
+    "3405690": "Competitor",
+    "1938090": "Competitor",
+    "3159330": "Competitor",
+    "1091500": "Competitor"
+  },
+  "coverage": {
+    "snapshots": 36,
+    "first_snapshot": "2026-11-18T18:14:57.195867+00:00",
+    "last_snapshot": "2026-11-18T19:05:16.836739+00:00",
+    "days_collected": 1
+  },
+  "daily_players": [
+    {
+      "app_id": 271590,
+      "name": "Grand Theft Auto V Legacy",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 68094.3,
+      "max_players": 68513
+    },
+    {
+      "app_id": 289070,
+      "name": "Sid Meier\u2019s Civilization\u00ae VI",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 22953.0,
+      "max_players": 23220
+    },
+    {
+      "app_id": 1091500,
+      "name": "Cyberpunk 2077",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 72515.0,
+      "max_players": 72515
+    },
+    {
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 26265.0,
+      "max_players": 26532
+    },
+    {
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 3708.8,
+      "max_players": 3824
+    },
+    {
+      "app_id": 1295660,
+      "name": "Sid Meier's Civilization VII",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 7435.8,
+      "max_players": 7484
+    },
+    {
+      "app_id": 1938090,
+      "name": "Call of Duty\u00ae",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 102669.0,
+      "max_players": 102669
+    },
+    {
+      "app_id": 3159330,
+      "name": "Assassin\u2019s Creed Shadows",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 1861.0,
+      "max_players": 1861
+    },
+    {
+      "app_id": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 64501.3,
+      "max_players": 64855
+    },
+    {
+      "app_id": 3405690,
+      "name": "EA SPORTS FC\u2122 26",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 20583.5,
+      "max_players": 20635
+    },
+    {
+      "app_id": 3472040,
+      "name": "NBA 2K26",
+      "snapshot_date": "2026-11-18",
+      "avg_players": 4550.3,
+      "max_players": 4884
+    }
+  ],
+  "latest_prices": [
+    {
+      "app_id": 3159330,
+      "name": "Assassin\u2019s Creed Shadows",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 8999,
+      "final_price_cents": 8999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 8999,
+      "final_price_cents": 8999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 1938090,
+      "name": "Call of Duty\u00ae",
+      "snapshot_date": "2026-11-18",
+      "currency": null,
+      "initial_price_cents": null,
+      "final_price_cents": null,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": false,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 1091500,
+      "name": "Cyberpunk 2077",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 7999,
+      "final_price_cents": 7999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 3405690,
+      "name": "EA SPORTS FC\u2122 26",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 8999,
+      "final_price_cents": 8999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 4499,
+      "final_price_cents": 4499,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 271590,
+      "name": "Grand Theft Auto V Legacy",
+      "snapshot_date": "2026-11-18",
+      "currency": null,
+      "initial_price_cents": null,
+      "final_price_cents": null,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": false,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 3472040,
+      "name": "NBA 2K26",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 8999,
+      "final_price_cents": 8999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 7999,
+      "final_price_cents": 7999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 289070,
+      "name": "Sid Meier\u2019s Civilization\u00ae VI",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 7999,
+      "final_price_cents": 7999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    },
+    {
+      "app_id": 1295660,
+      "name": "Sid Meier's Civilization VII",
+      "snapshot_date": "2026-11-18",
+      "currency": "CAD",
+      "initial_price_cents": 8999,
+      "final_price_cents": 8999,
+      "discount_percent": 0,
+      "is_free": false,
+      "is_purchasable": true,
+      "prev_final_cents": null
+    }
+  ],
+  "latest_reviews": [
+    {
+      "app_id": 271590,
+      "name": "Grand Theft Auto V Legacy",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Very Positive",
+      "total_reviews": 1901169,
+      "positive_ratio": 0.8805
+    },
+    {
+      "app_id": 289070,
+      "name": "Sid Meier\u2019s Civilization\u00ae VI",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Very Positive",
+      "total_reviews": 277645,
+      "positive_ratio": 0.8628
+    },
+    {
+      "app_id": 1091500,
+      "name": "Cyberpunk 2077",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Very Positive",
+      "total_reviews": 907871,
+      "positive_ratio": 0.8773
+    },
+    {
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Very Positive",
+      "total_reviews": 862072,
+      "positive_ratio": 0.926
+    },
+    {
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mixed",
+      "total_reviews": 59436,
+      "positive_ratio": 0.5909
+    },
+    {
+      "app_id": 1295660,
+      "name": "Sid Meier's Civilization VII",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mixed",
+      "total_reviews": 45726,
+      "positive_ratio": 0.4881
+    },
+    {
+      "app_id": 1938090,
+      "name": "Call of Duty\u00ae",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mixed",
+      "total_reviews": 434189,
+      "positive_ratio": 0.5564
+    },
+    {
+      "app_id": 3159330,
+      "name": "Assassin\u2019s Creed Shadows",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mostly Positive",
+      "total_reviews": 36183,
+      "positive_ratio": 0.7444
+    },
+    {
+      "app_id": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Very Positive",
+      "total_reviews": 225946,
+      "positive_ratio": 0.8407
+    },
+    {
+      "app_id": 3405690,
+      "name": "EA SPORTS FC\u2122 26",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mixed",
+      "total_reviews": 103713,
+      "positive_ratio": 0.5151
+    },
+    {
+      "app_id": 3472040,
+      "name": "NBA 2K26",
+      "snapshot_date": "2026-11-18",
+      "review_score_desc": "Mixed",
+      "total_reviews": 26236,
+      "positive_ratio": 0.6671
+    }
+  ],
+  "market_share": [
+    {
+      "snapshot_date": "2026-11-18",
+      "publisher_group": "Competitor",
+      "avg_players": 197629.0,
+      "share_pct": 50.0,
+      "rank_that_day": 1
+    },
+    {
+      "snapshot_date": "2026-11-18",
+      "publisher_group": "Take-Two",
+      "avg_players": 197509.0,
+      "share_pct": 50.0,
+      "rank_that_day": 2
+    }
+  ],
+  "hourly_profile": [
+    {
+      "app_id": 271590,
+      "local_hour": 13,
+      "avg_players": 68241.0,
+      "samples": 3
+    },
+    {
+      "app_id": 271590,
+      "local_hour": 14,
+      "avg_players": 67655.0,
+      "samples": 1
+    },
+    {
+      "app_id": 289070,
+      "local_hour": 13,
+      "avg_players": 23114.0,
+      "samples": 3
+    },
+    {
+      "app_id": 289070,
+      "local_hour": 14,
+      "avg_players": 22471.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1091500,
+      "local_hour": 13,
+      "avg_players": 72515.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1091500,
+      "local_hour": 14,
+      "avg_players": 72515.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1174180,
+      "local_hour": 13,
+      "avg_players": 26307.0,
+      "samples": 3
+    },
+    {
+      "app_id": 1174180,
+      "local_hour": 14,
+      "avg_players": 26140.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1285190,
+      "local_hour": 13,
+      "avg_players": 3670.0,
+      "samples": 3
+    },
+    {
+      "app_id": 1285190,
+      "local_hour": 14,
+      "avg_players": 3824.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1295660,
+      "local_hour": 13,
+      "avg_players": 7420.0,
+      "samples": 3
+    },
+    {
+      "app_id": 1295660,
+      "local_hour": 14,
+      "avg_players": 7484.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1938090,
+      "local_hour": 13,
+      "avg_players": 102669.0,
+      "samples": 1
+    },
+    {
+      "app_id": 1938090,
+      "local_hour": 14,
+      "avg_players": 102669.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3159330,
+      "local_hour": 13,
+      "avg_players": 1861.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3159330,
+      "local_hour": 14,
+      "avg_players": 1861.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3240220,
+      "local_hour": 13,
+      "avg_players": 64407.0,
+      "samples": 3
+    },
+    {
+      "app_id": 3240220,
+      "local_hour": 14,
+      "avg_players": 64784.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3405690,
+      "local_hour": 13,
+      "avg_players": 20635.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3405690,
+      "local_hour": 14,
+      "avg_players": 20532.0,
+      "samples": 1
+    },
+    {
+      "app_id": 3472040,
+      "local_hour": 13,
+      "avg_players": 4635.0,
+      "samples": 3
+    },
+    {
+      "app_id": 3472040,
+      "local_hour": 14,
+      "avg_players": 4296.0,
+      "samples": 1
+    }
+  ],
+  "peak_hours": [
+    {
+      "app_id": 1938090,
+      "name": "Call of Duty\u00ae",
+      "peak_hour_toronto": 14,
+      "peak_avg_players": 102669.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 102669.0,
+      "snapshots_used": 2.0
+    },
+    {
+      "app_id": 1091500,
+      "name": "Cyberpunk 2077",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 72515.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 72515.0,
+      "snapshots_used": 2.0
+    },
+    {
+      "app_id": 271590,
+      "name": "Grand Theft Auto V Legacy",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 68241.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 67655.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 3240220,
+      "name": "Grand Theft Auto V Enhanced",
+      "peak_hour_toronto": 14,
+      "peak_avg_players": 64784.0,
+      "quiet_hour_toronto": 13,
+      "quiet_avg_players": 64407.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 26307.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 26140.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 289070,
+      "name": "Sid Meier\u2019s Civilization\u00ae VI",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 23114.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 22471.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 3405690,
+      "name": "EA SPORTS FC\u2122 26",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 20635.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 20532.0,
+      "snapshots_used": 2.0
+    },
+    {
+      "app_id": 1295660,
+      "name": "Sid Meier's Civilization VII",
+      "peak_hour_toronto": 14,
+      "peak_avg_players": 7484.0,
+      "quiet_hour_toronto": 13,
+      "quiet_avg_players": 7420.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 3472040,
+      "name": "NBA 2K26",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 4635.0,
+      "quiet_hour_toronto": 14,
+      "quiet_avg_players": 4296.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "peak_hour_toronto": 14,
+      "peak_avg_players": 3824.0,
+      "quiet_hour_toronto": 13,
+      "quiet_avg_players": 3670.0,
+      "snapshots_used": 4.0
+    },
+    {
+      "app_id": 3159330,
+      "name": "Assassin\u2019s Creed Shadows",
+      "peak_hour_toronto": 13,
+      "peak_avg_players": 1861.0,
+      "quiet_hour_toronto": 13,
+      "quiet_avg_players": 1861.0,
+      "snapshots_used": 2.0
+    }
+  ],
+  "sale_impact": [],
+  "anomalies": [],
+  "twitch_daily": [],
+  "twitch_vs_players": [],
+  "recent_runs": [
+    {
+      "finished_at": "2026-11-18T19:05:38.945067+00:00",
+      "status": "success",
+      "rows_loaded": 47
+    },
+    {
+      "finished_at": "2026-11-18T18:53:23.798660+00:00",
+      "status": "success",
+      "rows_loaded": 69
+    },
+    {
+      "finished_at": "2026-11-18T18:22:12.008299+00:00",
+      "status": "success",
+      "rows_loaded": 42
+    },
+    {
+      "finished_at": "2026-11-18T18:15:41.113546+00:00",
+      "status": "failed",
+      "rows_loaded": 0
+    }
+  ]
+}

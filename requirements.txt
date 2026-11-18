@@ -1,0 +1,7 @@
+# Runtime dependencies. Versions are pinned to the minor release I tested with.
+requests~=2.34.0
+pyspark~=4.0.1          # needs Java 17+ on the machine (or use the Docker image)
+SQLAlchemy~=2.1.0
+psycopg[binary]~=3.3.0
+boto3~=1.44.0
+python-dotenv~=1.2.0

@@ -1,0 +1,26 @@
+{
+  "289070": {
+    "success": true,
+    "data": {
+      "type": "game",
+      "name": "Sid Meier's Civilization VI",
+      "steam_appid": 289070,
+      "required_age": 0,
+      "is_free": false,
+      "short_description": "Civilization VI offers new ways to interact with your world, expand your empire across the map, advance your culture, and compete against history's greatest leaders to build a civilization that will stand the test of time.",
+      "developers": ["Firaxis Games", "Aspyr (Mac)", "Aspyr (Linux)"],
+      "publishers": ["2K", "Aspyr (Mac)", "Aspyr (Linux)"],
+      "price_overview": {
+        "currency": "CAD",
+        "initial": 7999,
+        "final": 7999,
+        "discount_percent": 0,
+        "initial_formatted": "",
+        "final_formatted": "CDN$ 79.99"
+      },
+      "platforms": {"windows": true, "mac": true, "linux": true},
+      "genres": [{"id": "2", "description": "Strategy"}],
+      "release_date": {"coming_soon": false, "date": "20 Oct, 2016"}
+    }
+  }
+}

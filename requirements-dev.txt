@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest~=9.1.0
+responses~=0.26.0       # mocks HTTP calls to Steam
+moto[s3]~=5.2.0         # fakes S3 in tests
+ruff~=0.17.0

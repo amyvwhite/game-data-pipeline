@@ -1,0 +1,27 @@
+{
+  "1174180": {
+    "success": true,
+    "data": {
+      "type": "game",
+      "name": "Red Dead Redemption 2",
+      "steam_appid": 1174180,
+      "required_age": 17,
+      "is_free": false,
+      "short_description": "Winner of over 175 Game of the Year Awards and recipient of over 250 perfect scores, RDR2 is the epic tale of outlaw Arthur Morgan and the infamous Van der Linde gang, on the run across America at the dawn of the modern age.",
+      "developers": ["Rockstar Games"],
+      "publishers": ["Rockstar Games"],
+      "price_overview": {
+        "currency": "CAD",
+        "initial": 7999,
+        "final": 2639,
+        "discount_percent": 67,
+        "initial_formatted": "CDN$ 79.99",
+        "final_formatted": "CDN$ 26.39"
+      },
+      "platforms": {"windows": true, "mac": false, "linux": false},
+      "categories": [{"id": 2, "description": "Single-player"}, {"id": 1, "description": "Online PvP"}],
+      "genres": [{"id": "1", "description": "Action"}, {"id": "25", "description": "Adventure"}],
+      "release_date": {"coming_soon": false, "date": "5 Dec, 2019"}
+    }
+  }
+}

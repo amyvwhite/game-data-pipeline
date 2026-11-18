@@ -1,0 +1,17 @@
+{
+  "_comment": "Steam app IDs to track, checked against SteamDB / store.steampowered.com in Nov 2026. publisher_group drives the 'Take-Two vs competitors' view. twitch_game is the exact Twitch category name (optional; only one app per Twitch category so viewers aren't double-counted). steam: false marks a game that isn't on Steam (GTA VI launches on PS5/Xbox only on 2026-11-19), tracked on Twitch only with a placeholder negative app_id; when a Steam page appears, replace app_id with the real one and drop steam: false.",
+  "apps": [
+    {"app_id": -6, "name": "Grand Theft Auto VI", "publisher_group": "Take-Two", "twitch_game": "Grand Theft Auto VI", "steam": false},
+    {"app_id": 3240220, "name": "Grand Theft Auto V Enhanced", "publisher_group": "Take-Two", "twitch_game": "Grand Theft Auto V"},
+    {"app_id": 271590, "name": "Grand Theft Auto V Legacy", "publisher_group": "Take-Two"},
+    {"app_id": 1174180, "name": "Red Dead Redemption 2", "publisher_group": "Take-Two", "twitch_game": "Red Dead Redemption 2"},
+    {"app_id": 3472040, "name": "NBA 2K26", "publisher_group": "Take-Two", "twitch_game": "NBA 2K26"},
+    {"app_id": 1285190, "name": "Borderlands 4", "publisher_group": "Take-Two", "twitch_game": "Borderlands 4"},
+    {"app_id": 289070, "name": "Sid Meier's Civilization VI", "publisher_group": "Take-Two", "twitch_game": "Sid Meier's Civilization VI"},
+    {"app_id": 1295660, "name": "Sid Meier's Civilization VII", "publisher_group": "Take-Two", "twitch_game": "Sid Meier's Civilization VII"},
+    {"app_id": 3405690, "name": "EA Sports FC 26", "publisher_group": "Competitor", "twitch_game": "EA Sports FC 26"},
+    {"app_id": 1938090, "name": "Call of Duty", "publisher_group": "Competitor", "twitch_game": "Call of Duty: Black Ops 7"},
+    {"app_id": 3159330, "name": "Assassin's Creed Shadows", "publisher_group": "Competitor", "twitch_game": "Assassin's Creed Shadows"},
+    {"app_id": 1091500, "name": "Cyberpunk 2077", "publisher_group": "Competitor", "twitch_game": "Cyberpunk 2077"}
+  ]
+}

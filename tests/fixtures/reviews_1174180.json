@@ -1,0 +1,41 @@
+{
+  "response": {
+    "query_summary": {
+      "num_reviews": 1,
+      "review_score": 8,
+      "review_score_desc": "Very Positive",
+      "total_positive": 612340,
+      "total_negative": 57881,
+      "total_reviews": 670221
+    },
+    "reviews": [
+      {
+        "recommendationid": "201234567",
+        "author": {
+          "steamid": "76561198000000000",
+          "num_reviews": 12,
+          "playtime_forever": 9120,
+          "playtime_last_two_weeks": 0,
+          "playtime_at_review": 4310,
+          "last_played": 1760000000
+        },
+        "language": "english",
+        "review": "Beautiful world, slow start, worth it.",
+        "timestamp_created": 1762000000,
+        "timestamp_updated": 1762000000,
+        "voted_up": true,
+        "votes_up": 14,
+        "votes_funny": 1,
+        "weighted_vote_score": 0.61,
+        "comment_count": 0,
+        "steam_purchase": true,
+        "received_for_free": false,
+        "written_during_early_access": false,
+        "primarily_steam_deck": false,
+        "refunded": false
+      }
+    ],
+    "cursor": "AoJwnq2Bz5YDf7HE4wU=",
+    "total_matching": 670221
+  }
+}

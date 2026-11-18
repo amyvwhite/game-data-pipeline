@@ -1,0 +1,33 @@
+# Secrets
+.env
+*.pem
+
+# Data produced by the pipeline (raw JSON, Parquet). The warehouse CSVs are the
+# exception: GitHub Actions commits them so the history survives between runs.
+data/*
+!data/warehouse/
+
+# Local run logs
+logs/
+pipeline_log.txt
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Spark
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
