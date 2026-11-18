@@ -39,6 +39,10 @@ TABLES_BY_SOURCE = {
 }
 
 
+# Once-a-day sources and the table that shows today's fetch already happened (names are constants).
+DAILY_SOURCES = {"appdetails": "app_prices", "reviews": "review_summary", "review_text": "review_themes"}
+
+
 class CriticalQualityError(RuntimeError):
     pass
 
@@ -54,17 +58,19 @@ def resolve_sources(
     """
     if requested.strip() == "auto":
         sources = ["players", "twitch", "market"]
-        need_daily = True
-        if engine is not None:
-            from sqlalchemy import text
+        # Each once-a-day source is fetched until its own table has a row for today, so a
+        # new source (or one that failed earlier) catches up without waiting for tomorrow.
+        for source, table in DAILY_SOURCES.items():
+            have = None
+            if engine is not None:
+                from sqlalchemy import text
 
-            with engine.connect() as conn:
-                have = conn.execute(
-                    text("SELECT 1 FROM app_prices WHERE snapshot_date = :d LIMIT 1"), {"d": run_date}
-                ).first()
-            need_daily = have is None
-        if need_daily:
-            sources += ["appdetails", "reviews", "review_text"]
+                with engine.connect() as conn:
+                    have = conn.execute(
+                        text(f"SELECT 1 FROM {table} WHERE snapshot_date = :d LIMIT 1"), {"d": run_date}
+                    ).first()
+            if have is None:
+                sources.append(source)
     else:
         sources = [s.strip() for s in requested.split(",") if s.strip()]
         unknown = set(sources) - set(SOURCES)

@@ -319,6 +319,10 @@ def test_auto_sources(engine):
     # Prices for START are in -> hourly mode only.
     assert resolve_sources("auto", with_twitch, engine, START) == ("players", "twitch", "market")
     assert resolve_sources("auto", no_twitch, engine, START) == ("players", "market")
+    # A daily source whose table is still empty for today is fetched on its own.
+    with engine.begin() as conn:
+        conn.execute(text("DELETE FROM review_themes"))
+    assert resolve_sources("auto", no_twitch, engine, START) == ("players", "market", "review_text")
     # Re-processing saved raw data doesn't need Twitch credentials.
     assert "twitch" in resolve_sources("players,twitch", no_twitch, engine, START, extracting=False)
 

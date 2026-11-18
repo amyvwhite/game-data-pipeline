@@ -24,6 +24,8 @@ versioning: [SemVer](https://semver.org/).
 ### Changed
 - `--sources auto` now also collects `market` hourly and `review_text` daily.
 - Forecast history queries are capped at the forecast time (no lookahead).
+- Auto mode checks each daily source against its own table, so a new or previously failed
+  daily source catches up the same day.
 
 ## [0.1.0] - 2026-11-18
 
