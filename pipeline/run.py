@@ -34,6 +34,8 @@ TABLES_BY_SOURCE = {
     "appdetails": ["apps", "app_prices"],
     "reviews": ["review_summary"],
     "twitch": ["twitch_viewer_snapshots"],
+    "market": ["market_snapshots", "steam_app_names"],
+    "review_text": ["review_themes"],
 }
 
 
@@ -46,11 +48,12 @@ def resolve_sources(
 ) -> tuple[str, ...]:
     """Turn the --sources argument into the list of sources to fetch this run.
 
-    'auto' is for an hourly schedule: player counts (and Twitch, if configured) every
-    hour, and the slower store/review calls only until today's prices are loaded.
+    'auto' is for an hourly schedule: player counts, the top-100 market chart (and Twitch,
+    if configured) every hour, and the slower store/review calls only until today's
+    prices are loaded.
     """
     if requested.strip() == "auto":
-        sources = ["players", "twitch"]
+        sources = ["players", "twitch", "market"]
         need_daily = True
         if engine is not None:
             from sqlalchemy import text
@@ -61,7 +64,7 @@ def resolve_sources(
                 ).first()
             need_daily = have is None
         if need_daily:
-            sources += ["appdetails", "reviews"]
+            sources += ["appdetails", "reviews", "review_text"]
     else:
         sources = [s.strip() for s in requested.split(",") if s.strip()]
         unknown = set(sources) - set(SOURCES)
@@ -81,8 +84,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument(
         "--sources",
         default=",".join(SOURCES),
-        help=f"comma-separated subset of {','.join(SOURCES)}, or 'auto' (hourly mode: players and twitch "
-        "every run, plus prices and reviews once per day)",
+        help=f"comma-separated subset of {','.join(SOURCES)}, or 'auto' (hourly mode: players, market and "
+        "twitch every run, plus prices and reviews once per day)",
     )
     p.add_argument("--skip-extract", action="store_true", help="use raw data already in storage")
     p.add_argument("--skip-load", action="store_true", help="stop after quality checks (no Postgres)")
@@ -137,7 +140,24 @@ def run(args: argparse.Namespace, settings: Settings) -> int:
                 timeout_s=settings.request_timeout_s,
                 max_pages=settings.twitch_max_pages,
             )
-        result = run_extract(client, store, settings.apps, run_date, sources, settings.steam_country, twitch=twitch)
+        known_names: set[int] = set()
+        if engine is not None and "market" in sources:
+            from sqlalchemy import text
+
+            with engine.connect() as conn:
+                known_names = {
+                    r[0] for r in conn.execute(text("SELECT app_id FROM steam_app_names UNION SELECT app_id FROM apps"))
+                }
+        result = run_extract(
+            client,
+            store,
+            settings.apps,
+            run_date,
+            sources,
+            settings.steam_country,
+            twitch=twitch,
+            known_names=known_names,
+        )
         extract_failures = result.failures
         if not result.written:
             raise RuntimeError("Extract wrote nothing - is Steam reachable?")
@@ -186,18 +206,33 @@ def run(args: argparse.Namespace, settings: Settings) -> int:
         return 0
 
     # 4. Load --------------------------------------------------------------
-    from pipeline.analysis import detect_anomalies, format_anomaly_alert, refresh_player_daily
+    from pipeline.analysis import (
+        apply_retention,
+        detect_anomalies,
+        format_anomaly_alert,
+        refresh_market_daily,
+        refresh_player_daily,
+    )
     from pipeline.export import export_dashboard_summary
     from pipeline.load.postgres_loader import fetch_loaded_dates, load_tables, record_run
 
     counts = load_tables(engine, tables)
     # Daily stats come from every snapshot stored so far today, not just this run's raw files.
     refresh_player_daily(engine, run_date)
+    if "market" in sources:
+        refresh_market_daily(engine, run_date)
+        apply_retention(engine, run_date)
 
     # Unusual player counts (each one alerts once).
     anomalies = detect_anomalies(engine) if "players" in sources else []
     if anomalies:
         send_alert(settings, format_anomaly_alert(anomalies), critical=False)
+
+    # 24-hour-ahead forecasts (written once per target hour, scored later by query 13).
+    if "players" in sources:
+        from pipeline.forecast import write_forecasts
+
+        write_forecasts(engine)
 
     # Post-load: look for gaps in history (warning only).
     gap = check_missing_days("player_counts_daily", fetch_loaded_dates(engine, run_date), run_date)

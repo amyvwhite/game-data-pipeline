@@ -6,15 +6,27 @@
 **Live dashboard: https://amyvwhite.github.io/game-data-pipeline/**
 
 A data pipeline that runs **every hour, on its own**, tracking Take-Two games on Steam
-against four competitors: live player counts, prices, reviews and Twitch viewers. It
-cleans the data with PySpark, checks its quality, loads it into PostgreSQL, finds
-unusual player counts and sends alerts, and publishes a dashboard.
+against four competitors and the whole Steam top 100: live player counts, prices, reviews,
+review themes and Twitch viewers. It cleans the data with PySpark, checks its quality, loads
+it into PostgreSQL, forecasts the next 24 hours, finds unusual player counts and sends
+alerts, and publishes a dashboard.
+
+**In numbers:** ~3,500 new rows a day across 14 tables · 15 analytical SQL queries · 3 forecast
+models scored out-of-sample · 100+ tests at 88% coverage · lint, type checks and tests in CI ·
+4 architecture decision records. Read the [case study](docs/CASE_STUDY.md) for the story and findings.
 
 **Questions it answers:**
 
 - What share of players across these 11 games are in Take-Two titles, day by day?
 - When is each game busiest (by hour, Toronto time)?
-- Do sales bring players back? (players on sale days vs full-price days)
+- Do sales bring players back? Sale periods are compared with the week before **and** with
+  games that weren't on sale (difference-in-differences), so weekends and Steam-wide sales
+  don't get credited to the discount.
+- Where do Take-Two games rank in the whole Steam market, and what share of the top-100's
+  players do they hold?
+- What are players complaining about this week: performance, bugs, price, monetization, servers?
+- How many players will each game have over the next 24 hours, and is the forecast better
+  than "same as yesterday"?
 - Is anything unusual happening right now? (a spike or drop vs that game's normal level for that time of day)
 - Does Twitch attention line up with players?
 - **GTA VI launch watch:** GTA VI launches on PS5/Xbox on Nov 19, 2026 and isn't on Steam, so
@@ -44,8 +56,9 @@ There's no always-on server or database. Each hourly run (`.github/workflows/liv
 starts a fresh Postgres, restores the full history from CSV files in this repo, runs
 the pipeline, dumps the tables back out and commits them, then publishes the dashboard
 to GitHub Pages. Git is the storage layer, so every hour's change is in the commit
-history. `--sources auto` fetches player counts and Twitch every hour, and the slower
-store and review calls once a day.
+history. `--sources auto` fetches player counts, the top-100 market and Twitch every hour,
+and the slower store, review and review-text calls once a day. Design decisions and their
+trade-offs are written up in [docs/adr/](docs/adr/).
 
 ## What it collects
 
@@ -54,6 +67,13 @@ store and review calls once a day.
 | Current players | `GET https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=<id>` | No |
 | Name, publisher, price, discount | `GET https://store.steampowered.com/api/appdetails?appids=<id>&cc=ca` (store endpoint; not officially documented, widely used) | No |
 | Review totals and score | `GET https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/?input_json={...}` | No (optional) |
+| 100 recent reviews (for themes) | same endpoint, `filter=1` (Recent), `num_per_page=100` | No |
+| Top 100 most played | `GET https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/` | No |
+| Twitch viewers per game | `GET https://api.twitch.tv/helix/streams?game_id=<id>` | Yes (free app keys) |
+
+Only theme **counts** are stored from review text, never the text or reviewer ids
+([ADR 0002](docs/adr/0002-review-text-data-minimisation.md)). Every table, its grain and its
+quality rules are in the [data dictionary](docs/DATA_DICTIONARY.md).
 
 For reviews I use `IUserReviewsService/GetAppReviews`, because Valve's docs mark the
 older `store.steampowered.com/appreviews/<id>?json=1` endpoint as deprecated.
@@ -91,9 +111,11 @@ One command runs the whole thing: `python -m pipeline.run`.
    failing game doesn't stop the others. Raw files go to `data/raw/<source>/dt=YYYY-MM-DD/`
    locally, or to S3 when `STORAGE_BACKEND=s3`.
 2. **Transform** (`pipeline/transform/spark_job.py`): a PySpark job with explicit schemas
-   builds five clean tables: `apps`, `player_count_snapshots`, `player_counts_daily`,
-   `app_prices` and `review_summary`. If something was fetched twice in a day, a window
-   function keeps the latest. It also writes Parquet partitioned by date.
+   builds nine clean tables (players, prices, reviews, Twitch, the exploded top-100 market,
+   names, and review themes). Review themes are tagged in one Spark pass: every review is
+   matched against every rule with `rlike`, exploded to (review, theme) pairs and
+   aggregated. If something was fetched twice in a day, a window function keeps the
+   latest. It also writes Parquet partitioned by date.
 3. **Quality** (`pipeline/quality/`): checks row counts, nulls, duplicate keys, freshness,
    missing games, impossible values (negative players, discounts over 100%, review
    totals that don't add up), and gaps in the last 7 days. Critical failures send an
@@ -101,7 +123,13 @@ One command runs the whole thing: `python -m pipeline.run`.
    continue.
 4. **Load** (`pipeline/load/`): upserts into Postgres (`INSERT ... ON CONFLICT DO UPDATE`)
    in one transaction, so re-running a day is safe. Each run is logged in `pipeline_runs`.
-5. **Export + dashboard** (`pipeline/export.py`, `dashboard/`): writes
+5. **Analyse** (`pipeline/analysis.py`, `pipeline/forecast.py`): rebuilds daily rollups,
+   applies the market retention policy, flags anomalies, and writes 24-hour-ahead forecasts
+   from three models (seasonal rhythm, "same hour yesterday", and their ensemble). Each
+   forecast is written once and never revised, then scored once its hour has passed; each
+   game's most accurate model over the last week becomes its "champion"
+   ([ADR 0003](docs/adr/0003-forecast-models-and-scoring.md)).
+6. **Export + dashboard** (`pipeline/export.py`, `dashboard/`): writes
    `dashboard/data/summary.json`, which a plain HTML/CSS/JS page charts with Chart.js.
 
 ## Project layout
@@ -114,10 +142,15 @@ pipeline/
   transform/             PySpark job
   quality/               checks + alerts
   load/                  Postgres loader
+  analysis.py            rollups, retention, anomaly detection
+  forecast.py            forecast models (pure functions) + writer
   export.py              JSON summary for the dashboard
+  warehouse.py           dump/restore the warehouse to CSV (the live GitHub setup)
 sql/
-  schema.sql             tables, keys, constraints, indexes
-  queries/               12 analytical queries (CTEs, window functions, LATERAL, CORR)
+  schema.sql             tables, keys, constraints, indexes, migrations
+  queries/               15 analytical queries (CTEs, window functions, LATERAL, CORR, gaps-and-islands)
+config/review_themes.json  versioned theme rules for review text
+docs/                    case study, data dictionary, ADRs, go-live guide
 dashboard/               static page (index.html, style.css, app.js)
 config/apps.json         which games to track
 scripts/seed_demo_data.py  SYNTHETIC history for demos
@@ -205,6 +238,9 @@ the question it answers and the SQL ideas it uses:
 | `10_market_share.sql` | Take-Two vs competitors share of players, `SUM() OVER (PARTITION BY ...)` |
 | `12_gta6_launch_watch.sql` | Take-Two Steam players vs the week before GTA VI's launch, next to GTA VI Twitch viewers (a `params` CTE, relative baselines) |
 | `11_twitch_vs_players.sql` | nearest-in-time join with `LATERAL ... LIMIT 1`, `CORR()` between viewers and players |
+| `13_forecast_accuracy.sql` | forecast vs actual, MAPE, skill score vs a baseline, champion per game with `DISTINCT ON` |
+| `14_sale_lift.sql` | gaps-and-islands sale episodes, difference-in-differences against a control group (`LATERAL`, `NOT EXISTS`) |
+| `15_steam_top100.sql` | latest snapshot, two dimension joins, share of the whole market |
 
 For example, price-change detection:
 
@@ -242,8 +278,10 @@ make test-all          # also runs the Postgres integration tests against docker
   `sql/queries/` runs**, that loads are idempotent, and that price-change detection
   finds the sale. Be careful: they drop and recreate tables, so point them at a test database.
 
-CI (`.github/workflows/ci.yml`) runs ruff, then the full test suite with a Postgres
-service container and Java 17, then builds the Docker image. There's also a
+CI (`.github/workflows/ci.yml`) runs ruff (lint + format), mypy (types), then the full test
+suite with a Postgres service container and Java 17 and fails if coverage drops below 85%,
+then builds the Docker image. `pre-commit install` runs the same checks locally before
+each commit. There's also a
 `Jenkinsfile` with the same stages, because many teams use Jenkins.
 
 ## What works today
@@ -259,9 +297,14 @@ service container and Java 17, then builds the Docker image. There's also a
 - **Fixed a time-zone bug:** PySpark returns timestamps in the machine's local time zone,
   which shifted hours on a non-UTC laptop. Timestamps are now explicitly UTC, with a test
   that runs in Toronto time.
-- **Tests:** 76 unit and integration tests (Spark transforms, quality rules, the Steam and
-  Twitch clients with mocked HTTP, Postgres loads, every SQL query, anomaly detection,
-  and the warehouse dump and restore round trip). Lint clean.
+- **Tests:** 101 unit and integration tests at 88% coverage (Spark transforms, quality rules,
+  the Steam and Twitch clients with mocked HTTP, Postgres loads, every SQL query, anomaly
+  detection, forecast models, sale lift against a control group, retention, and the
+  warehouse dump and restore round trip). Lint, format and type checks clean.
+- **Forecasts that have to earn their place:** the first seasonal model lost to the
+  "same hour yesterday" baseline in backtesting. The fix (a rolling window instead of
+  calendar days) and an ensemble now beat it, and the dashboard says so per game when
+  the baseline wins.
 - **Docker** (`docker compose up`) for running locally, plus an hourly Windows Task
   Scheduler option (`START_HOURLY_COLLECTION.bat`).
 
@@ -282,6 +325,8 @@ Known limits, on purpose:
 - [ ] Explain anomalies automatically: match spikes to Steam news/patch notes and sales.
 - [ ] Track regional prices (`cc=us`, `gb`, ...) and currency conversion.
 - [ ] dbt models on top of the Postgres tables; incremental loads.
+- [ ] Weekly seasonality in the forecasts (a "same hour last week" challenger) once there are 2+ weeks of data.
+- [ ] Swap the keyword theme model for an ML/LLM classifier behind the same table contract.
 
 ## Licence
 

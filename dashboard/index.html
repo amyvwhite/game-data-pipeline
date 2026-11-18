@@ -68,6 +68,45 @@
       </details>
     </section>
 
+    <section class="card">
+      <div class="card-head">
+        <h2>Forecast vs actual: players over the next 24 hours</h2>
+        <label class="toggle">Game
+          <select id="forecast-game" aria-label="Game to show in the forecast chart"></select>
+        </label>
+      </div>
+      <p class="muted small">Solid = what happened (hourly). Dashed = the forecast, made 24 hours in advance and never
+        revised. Three models compete; each game shows whichever was most accurate over the past week.</p>
+      <div class="chart-box short"><canvas id="forecast-chart" role="img"
+        aria-label="Line chart of actual players and the 24-hour-ahead forecast for one game"></canvas></div>
+      <h3 class="subhead">How accurate is it? (last 7 days)</h3>
+      <p class="muted small">Error = average % miss per hour (MAPE), lower is better. Seasonal = learns each game's
+        daily rhythm. Baseline = "same hour yesterday". Ensemble = the average of the two. Skill above 0 means the
+        champion beats the baseline.</p>
+      <div class="table-wrap"><table id="forecast-table"></table></div>
+    </section>
+
+    <section class="card">
+      <h2>Take-Two in the whole Steam market (top 100 most played)</h2>
+      <p class="muted small">Every hour the pipeline pulls Steam's top-100 chart and the live player count of all 100
+        games (about 2,400 rows a day, processed in Spark). Tracked games are tagged.</p>
+      <div class="mini-tiles" id="top100-tiles"></div>
+      <div class="table-wrap"><table id="top100-table"></table></div>
+      <details>
+        <summary>Show all 100</summary>
+        <div class="table-wrap"><table id="top100-all"></table></div>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>What players are talking about in recent reviews</h2>
+      <p class="muted small">Share of each game's 100 most recent English reviews that mention a theme, with the share of
+        those mentions that came from negative reviews. Keyword theme model, versioned in
+        <code>config/review_themes.json</code>; only counts are stored, never review text.</p>
+      <div class="table-wrap"><table id="themes-table"></table></div>
+      <p class="muted small" id="themes-note"></p>
+    </section>
+
     <div class="two-col">
       <section class="card">
         <h2>Unusual player counts</h2>
@@ -94,9 +133,14 @@
 
     <section class="card">
       <h2>Do sales bring players back?</h2>
-      <p class="muted small">Average daily players on sale days vs full-price days. Correlation, not proof:
-        sales often line up with updates and holidays.</p>
-      <div class="table-wrap"><table id="sale-table"></table></div>
+      <p class="muted small">Each sale compared with the week before it, minus the change in tracked games that were
+        <em>not</em> on sale over the same days (a control group). That removes weekend, holiday and Steam-wide effects.
+        Still observational: a sale that lands with a big update will look bigger.</p>
+      <div class="table-wrap"><table id="lift-table"></table></div>
+      <details>
+        <summary>Simple version: average players on sale days vs full-price days</summary>
+        <div class="table-wrap"><table id="sale-table"></table></div>
+      </details>
     </section>
 
     <section class="card">

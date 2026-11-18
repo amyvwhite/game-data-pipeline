@@ -54,6 +54,15 @@ TABLES: dict[str, tuple[list[str], list[str]]] = {
         ["app_id", "captured_at"],
         ["app_id", "captured_at", "snapshot_date", "viewer_count", "stream_count", "truncated"],
     ),
+    "market_snapshots": (
+        ["app_id", "captured_at"],
+        ["app_id", "captured_at", "snapshot_date", "rank", "last_week_rank", "peak_in_game", "current_players"],
+    ),
+    "steam_app_names": (["app_id"], ["app_id", "name", "first_seen_at"]),
+    "review_themes": (
+        ["app_id", "snapshot_date", "theme"],
+        ["app_id", "snapshot_date", "theme", "theme_version", "reviews_sampled", "mentions", "negative_mentions"],
+    ),
     "review_summary": (
         ["app_id", "snapshot_date"],
         [
@@ -91,6 +100,9 @@ def build_upsert(table: str) -> str:
     updates = ", ".join(f"{c} = EXCLUDED.{c}" for c in cols if c not in key)
     if table == "apps":
         updates += ", updated_at = now()"
+    if table == "steam_app_names":
+        # Keep the first time we saw the game; only refresh the name.
+        updates = "name = EXCLUDED.name"
     return f"INSERT INTO {table} ({col_list}) VALUES ({params}) ON CONFLICT ({', '.join(key)}) DO UPDATE SET {updates}"
 
 

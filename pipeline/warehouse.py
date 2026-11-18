@@ -17,6 +17,7 @@ import argparse
 import logging
 import sys
 from pathlib import Path
+from typing import Any, cast
 
 from sqlalchemy import Engine, text
 
@@ -82,6 +83,20 @@ WAREHOUSE_TABLES: dict[str, tuple[list[str], str]] = {
         ],
         "app_id, captured_at",
     ),
+    "market_snapshots": (
+        ["app_id", "captured_at", "snapshot_date", "rank", "last_week_rank", "peak_in_game", "current_players"],
+        "app_id, captured_at",
+    ),
+    "market_daily": (
+        ["app_id", "snapshot_date", "best_rank", "avg_players", "max_players", "snapshot_count"],
+        "app_id, snapshot_date",
+    ),
+    "steam_app_names": (["app_id", "name", "first_seen_at"], "app_id"),
+    "review_themes": (
+        ["app_id", "snapshot_date", "theme", "theme_version", "reviews_sampled", "mentions", "negative_mentions"],
+        "app_id, snapshot_date, theme",
+    ),
+    "player_forecasts": (["app_id", "target_hour", "model", "predicted", "made_at"], "app_id, target_hour, model"),
     "pipeline_runs": (["run_date", "started_at", "finished_at", "status", "rows_loaded"], "started_at"),
 }
 
@@ -91,7 +106,7 @@ def dump(engine: Engine, out_dir: Path = WAREHOUSE_DIR) -> dict[str, int]:
     counts: dict[str, int] = {}
     raw = engine.raw_connection()
     try:
-        with raw.cursor() as cur:
+        with cast(Any, raw.cursor()) as cur:  # psycopg cursor; SQLAlchemy types it as plain DB-API
             cur.execute("SET TIME ZONE 'UTC'")
             for table, (cols, order_by) in WAREHOUSE_TABLES.items():
                 path = out_dir / f"{table}.csv"
@@ -116,7 +131,7 @@ def restore(engine: Engine, in_dir: Path = WAREHOUSE_DIR) -> dict[str, int]:
                 raise RuntimeError(f"{table} already has rows; restore only works on an empty database")
     raw = engine.raw_connection()
     try:
-        with raw.cursor() as cur:
+        with cast(Any, raw.cursor()) as cur:  # psycopg cursor; SQLAlchemy types it as plain DB-API
             cur.execute("SET TIME ZONE 'UTC'")
             for table, (cols, _) in WAREHOUSE_TABLES.items():
                 path = in_dir / f"{table}.csv"

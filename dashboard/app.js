@@ -446,6 +446,177 @@ function setupFilters() {
   }
 }
 
+// ---- 0.2: forecasts, top 100, review themes, sale lift ----------------------
+
+const signed = (v, unit = "%") => (v == null ? "–" : `${v > 0 ? "+" : ""}${v}${unit}`);
+const MODEL_LABELS = { seasonal_profile: "Seasonal", naive_24h: "Baseline", ensemble: "Ensemble" };
+const THEME_LABELS = {
+  performance: "Performance", bugs_crashes: "Bugs / crashes", price_value: "Price / value",
+  monetization: "Monetization", servers_online: "Online / cheaters", content_story: "Content / story",
+  launcher_drm: "Launcher / DRM",
+};
+
+function renderForecast(data, colours) {
+  const select = document.getElementById("forecast-game");
+  const names = new Map(data.daily_players.map((r) => [r.app_id, r.name]));
+  const series = groupByApp((data.forecast_series || []).map((r) => ({ ...r, name: names.get(r.app_id) })));
+  const canvas = document.getElementById("forecast-chart");
+  let chart = null;
+
+  const fillSelect = () => {
+    const ids = [...series.keys()].filter((id) => inGroup(id) && names.has(id));
+    const keep = ids.includes(Number(select.value)) ? Number(select.value) : ids[0];
+    select.replaceChildren(...ids.map((id) => el("option", { value: id, selected: id === keep }, names.get(id))));
+  };
+  const draw = () => {
+    const id = Number(select.value);
+    const rows = series.get(id)?.rows || [];
+    const labels = rows.map((r) => new Date(r.hour).toLocaleString("en-CA", { weekday: "short", hour: "numeric" }));
+    const colour = colours.get(id) || css("--series-1");
+    const datasets = [
+      { label: "Actual", data: rows.map((r) => r.actual), ...LINE_STYLE(colour), spanGaps: false },
+      { label: `Forecast, 24h ahead (${MODEL_LABELS[rows.find((r) => r.model)?.model] || "Ensemble"} model)`, data: rows.map((r) => r.forecast), ...LINE_STYLE(colour), borderDash: [6, 4],
+        borderWidth: 2, spanGaps: true },
+    ];
+    if (chart) {
+      chart.data.labels = labels;
+      chart.data.datasets = datasets;
+      chart.update();
+      return;
+    }
+    chart = new Chart(canvas, {
+      type: "line",
+      data: { labels, datasets },
+      options: {
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "line", color: css("--text-secondary") } },
+          tooltip: { callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${fmtInt(ctx.raw)}` } },
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: css("--text-muted"), maxTicksLimit: 10 } },
+          y: AXIS({ beginAtZero: true, ticks: { color: css("--text-muted"), callback: (v) => fmtInt(v) } }),
+        },
+      },
+    });
+  };
+  fillSelect();
+  if (select.value) draw();
+  select.addEventListener("change", draw);
+  onGroupChange.push(() => {
+    fillSelect();
+    if (select.value) draw();
+  });
+
+  const table = document.getElementById("forecast-table");
+  const acc = data.forecast_accuracy || [];
+  if (!acc.length) {
+    return emptyRow(table, 7, "Scores appear once forecasts made 24 hours ago can be checked against what happened.");
+  }
+  fillTable(
+    table,
+    [["Game"], ["Hours scored", true], ["Seasonal", true], ["Ensemble", true], ["Baseline", true], ["Champion"], ["Skill vs baseline", true]],
+    acc.map((r) => {
+      const skill = r.skill == null ? "–" : r.skill.toFixed(2);
+      const verdict = r.skill == null ? "" : r.skill > 0 ? "beats baseline" : "baseline wins";
+      const pct = (v) => (v == null ? "–" : `${v}%`);
+      return [
+        [r.name], [r.hours_scored, true], [pct(r.seasonal_mape_pct), true], [pct(r.ensemble_mape_pct), true],
+        [pct(r.baseline_mape_pct), true], [MODEL_LABELS[r.champion] || r.champion],
+        [el("span", {}, skill, verdict ? el("span", { class: r.skill > 0 ? "verdict" : "verdict no" }, verdict) : ""), true],
+      ];
+    })
+  );
+}
+
+function renderTop100(data) {
+  const rows = data.top100 || [];
+  const tiles = document.getElementById("top100-tiles");
+  const table = document.getElementById("top100-table");
+  if (!rows.length) {
+    tiles.replaceChildren();
+    emptyRow(document.getElementById("top100-all"), 1, "");
+    return emptyRow(table, 5, "The top-100 snapshot appears after the next hourly run.");
+  }
+  const t2 = rows.filter((r) => r.publisher_group === "Take-Two");
+  const share = t2.reduce((s, r) => s + (r.share_of_top100_pct || 0), 0);
+  const best = t2[0];
+  const latestDay = (data.top100_share || []).filter((r) => r.publisher_group === "Take-Two").slice(-1)[0];
+  const mini = [
+    ["Take-Two games in the top 100", String(t2.length)],
+    ["Take-Two share of top-100 players", `${share.toFixed(1)}%`],
+    ["Best Take-Two rank", best ? `#${best.rank}` : "–"],
+    ["Snapshot", new Date(rows[0].captured_at).toLocaleString("en-CA", { hour: "numeric", minute: "2-digit", month: "short", day: "numeric" })],
+  ];
+  tiles.replaceChildren(...mini.map(([l, v]) => el("div", {}, el("div", { class: "label" }, l), el("div", { class: "value" }, v))));
+  if (latestDay) tiles.title = `Daily average share on ${latestDay.snapshot_date}: ${latestDay.share_pct}%`;
+
+  const toRow = (r) => {
+    const tracked = r.publisher_group !== "Other";
+    const tr = el("tr", tracked ? { class: "tracked" } : {},
+      td(`#${r.rank}`, true),
+      el("td", {}, r.name, tracked ? el("span", { class: "tag" }, r.publisher_group) : ""),
+      td(fmtInt(r.current_players), true),
+      td(r.last_week_rank ? signed(r.last_week_rank - r.rank, "") : "new", true),
+      td(r.share_of_top100_pct == null ? "–" : `${r.share_of_top100_pct}%`, true));
+    return tr;
+  };
+  const head = el("thead", {}, el("tr", {}, th("Rank", true), th("Game"), th("Players now", true),
+    th("Places vs last week", true), th("Share of top 100", true)));
+  const shortList = rows.filter((r) => r.rank <= 10 || r.publisher_group !== "Other");
+  table.replaceChildren(head.cloneNode(true), el("tbody", {}, ...shortList.map(toRow)));
+  document.getElementById("top100-all").replaceChildren(head, el("tbody", {}, ...rows.map(toRow)));
+}
+
+function renderThemes(data) {
+  const table = document.getElementById("themes-table");
+  const note = document.getElementById("themes-note");
+  const rows = data.review_themes || [];
+  const draw = () => {
+    const games = groupByApp(rows.filter((r) => inGroup(r.app_id)));
+    if (!games.size) return emptyRow(table, 2, "Review themes appear after the first daily run.");
+    const themes = Object.keys(THEME_LABELS).filter((t) => rows.some((r) => r.theme === t));
+    const max = Math.max(1, ...rows.map((r) => r.mention_pct || 0));
+    const cell = (r) => {
+      if (!r) return td("–", true);
+      const alpha = (0.08 + 0.42 * (r.mention_pct || 0) / max).toFixed(2);
+      return el("td", { class: "num heat", title: `${r.mentions} of ${r.reviews_sampled} reviews; ${r.negative_mentions} negative` },
+        el("span", { class: "fill", style: `opacity:${alpha}` }),
+        el("span", { class: "txt" }, `${r.mention_pct ?? 0}%`),
+        r.mentions ? el("span", { class: "neg txt" }, `${Math.round(r.negative_share_pct ?? 0)}% neg`) : "");
+    };
+    table.replaceChildren(
+      el("thead", {}, el("tr", {}, th("Game"), ...themes.map((t) => th(THEME_LABELS[t], true)))),
+      el("tbody", {}, ...[...games].map(([, g]) => {
+        const byTheme = new Map(g.rows.map((r) => [r.theme, r]));
+        return el("tr", {}, td(g.name), ...themes.map((t) => cell(byTheme.get(t))));
+      }))
+    );
+  };
+  draw();
+  onGroupChange.push(draw);
+  if (rows.length) note.textContent = `Reviews from ${rows[0].snapshot_date}, theme rules v${rows[0].theme_version}.`;
+}
+
+function renderSaleLift(data) {
+  const table = document.getElementById("lift-table");
+  const rows = data.sale_lift || [];
+  if (!rows.length) {
+    return emptyRow(table, 7, "Needs a sale with at least 3 days of data before it. Steam's autumn sale should fill this in.");
+  }
+  fillTable(
+    table,
+    [["Game"], ["Sale"], ["Discount", true], ["Players before → during", true], ["Change", true], ["Other games", true], ["Lift from the sale", true]],
+    rows.map((r) => [
+      [r.name], [`${r.sale_start} → ${r.sale_end}`], [`${r.discount_pct}%`, true],
+      [`${fmtInt(r.pre_avg_players)} → ${fmtInt(r.sale_avg_players)}`, true],
+      [signed(r.raw_change_pct), true], [signed(r.control_change_pct), true],
+      [r.lift_pct_points == null ? "–" : `${signed(r.lift_pct_points, "")} pts`, true],
+    ])
+  );
+}
+
 async function main() {
   const meta = document.getElementById("meta");
   let data;
@@ -471,7 +642,11 @@ async function main() {
   renderHealth(data);
   renderLaunchWatch(data);
   renderSales(data);
+  renderSaleLift(data);
   renderTwitch(data);
+  renderForecast(data, colours);
+  renderTop100(data);
+  renderThemes(data);
   setupFilters();
   renderPrices(data.latest_prices, colours);
   renderReviews(data.latest_reviews);

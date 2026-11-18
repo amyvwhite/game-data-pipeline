@@ -60,6 +60,15 @@ TABLE_RULES: dict[str, dict[str, list[str]]] = {
         "key": ["app_id", "captured_at"],
         "not_null": ["app_id", "captured_at", "snapshot_date", "viewer_count", "stream_count"],
     },
+    "market_snapshots": {
+        "key": ["app_id", "captured_at"],
+        "not_null": ["app_id", "captured_at", "snapshot_date", "rank"],
+    },
+    "steam_app_names": {"key": ["app_id"], "not_null": ["app_id", "name", "first_seen_at"]},
+    "review_themes": {
+        "key": ["app_id", "snapshot_date", "theme"],
+        "not_null": ["app_id", "snapshot_date", "theme", "theme_version", "reviews_sampled", "mentions"],
+    },
 }
 
 # Tables that must have rows every day. "apps" is a dimension, so not in this list.
@@ -210,6 +219,67 @@ def check_review_values(rows: Rows) -> list[CheckResult]:
     ]
 
 
+def check_market_values(rows: Rows, expected_size: int = 100) -> list[CheckResult]:
+    """The chart should hold ~100 games per snapshot with ranks 1..100. Warnings only: a thin
+    chart is worth an alert but must never block today's player counts from loading."""
+    per_snapshot = Counter(r.get("captured_at") for r in rows)
+    small = {str(k): n for k, n in per_snapshot.items() if n < expected_size * 0.9}
+    bad_rank = sorted(
+        {int(r["rank"]) for r in rows if r.get("rank") is not None and not 1 <= r["rank"] <= expected_size}
+    )
+    negative = [r["app_id"] for r in rows if (r.get("current_players") or 0) < 0]
+    return [
+        CheckResult(
+            "chart_size",
+            "market_snapshots",
+            not small,
+            Severity.WARNING,
+            f"snapshots with <90% of {expected_size} games: {small}" if small else "ok",
+        ),
+        CheckResult(
+            "rank_range",
+            "market_snapshots",
+            not bad_rank,
+            Severity.WARNING,
+            f"ranks outside 1-{expected_size}: {bad_rank[:5]}" if bad_rank else "ok",
+        ),
+        CheckResult(
+            "non_negative",
+            "market_snapshots",
+            not negative,
+            Severity.CRITICAL,
+            f"negative player counts for {negative}" if negative else "ok",
+        ),
+    ]
+
+
+def check_theme_values(rows: Rows, min_sample: int = 20) -> list[CheckResult]:
+    """Counts must be internally consistent (the database enforces this too, so catch it first)
+    and the sample should be big enough to mean something."""
+    inconsistent = [
+        (r["app_id"], r["theme"])
+        for r in rows
+        if not 0 <= (r.get("negative_mentions") or 0) <= (r.get("mentions") or 0) <= (r.get("reviews_sampled") or 0)
+    ]
+    thin = sorted({r["app_id"] for r in rows if (r.get("reviews_sampled") or 0) < min_sample})
+    return [
+        CheckResult(
+            "counts_consistent",
+            "review_themes",
+            not inconsistent,
+            Severity.CRITICAL,
+            f"negative <= mentions <= sampled broken for {inconsistent[:5]}" if inconsistent else "ok",
+        ),
+        CheckResult(
+            "sample_size",
+            "review_themes",
+            not thin,
+            Severity.WARNING,
+            f"fewer than {min_sample} reviews sampled for {thin}" if thin else "ok",
+        ),
+    ]
+
+
 def check_missing_days(table: str, loaded_dates: list[date], run_date: date, lookback_days: int = 7) -> CheckResult:
     """Look back over the last N days and flag any day with no data at all.
 
@@ -241,6 +311,8 @@ def run_checks(tables: dict[str, Rows], run_date: date, expected_app_ids: set[in
     results += check_player_values(tables.get("player_count_snapshots", []))
     results += check_price_values(tables.get("app_prices", []))
     results += check_review_values(tables.get("review_summary", []))
+    results += check_market_values(tables.get("market_snapshots", []))
+    results += check_theme_values(tables.get("review_themes", []))
     return results
 
 

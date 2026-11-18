@@ -3,8 +3,9 @@
 #
 # Each run:
 #   1. starts a fresh Postgres and restores the history from data/warehouse/*.csv
-#   2. runs the pipeline in "auto" mode (players + Twitch every hour, prices and
-#      reviews once a day), including quality checks and anomaly detection
+#   2. runs the pipeline in "auto" mode (players, the Steam top-100 market and Twitch
+#      every hour; prices, review totals and review themes once a day), including
+#      quality checks, anomaly detection and 24-hour-ahead forecasts
 #   3. dumps the tables back to CSV and commits them (with the dashboard data)
 #   4. deploys dashboard/ to GitHub Pages
 #

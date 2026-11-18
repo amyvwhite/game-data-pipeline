@@ -1,0 +1,13 @@
+{
+  "version": "2026.11.1",
+  "description": "Keyword theme model for Steam review text. Each theme is a case-insensitive regular expression matched against the review body (Java regex syntax, used by Spark rlike). A review can match several themes. Bump the version when a pattern changes so historical rows can be traced to the rules that produced them.",
+  "themes": {
+    "performance": "\\b(fps|frame ?rate|stutter\\w*|lag\\w*|optimi[sz]\\w*|performance|frame drops?|runs? (bad|poorly|terrible))\\b",
+    "bugs_crashes": "\\b(bugs?|buggy|crash\\w*|glitch\\w*|broken|freez\\w*|won'?t (launch|start)|black screen)\\b",
+    "price_value": "\\b(price\\w*|overpriced|expensive|cheap|worth (it|the money)|full price|on sale|refund\\w*|value)\\b",
+    "monetization": "\\b(microtransactions?|mtx|pay ?to ?win|p2w|shark cards?|vc|virtual currency|battle ?pass|loot ?box\\w*|in-?game purchases?)\\b",
+    "servers_online": "\\b(servers?|online|matchmaking|disconnect\\w*|connection|lobby|lobbies|cheaters?|hackers?|modders?)\\b",
+    "content_story": "\\b(story|campaign|missions?|content|open world|characters?|graphics|visuals|soundtrack|multiplayer)\\b",
+    "launcher_drm": "\\b(launcher|rockstar launcher|2k launcher|ea app|ubisoft connect|drm|anti-?cheat|account link\\w*|log ?in)\\b"
+  }
+}

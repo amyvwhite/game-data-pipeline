@@ -10,6 +10,10 @@ Output tables (one row per app per day unless noted):
     player_counts_daily     - min / max / avg players per app per day
     app_prices              - price and discount per app per day
     review_summary          - review totals and score per app per day
+    twitch_viewer_snapshots - Twitch viewers / streams per game per fetch
+    market_snapshots        - Steam top-100 chart + live players, one row per game per fetch
+    steam_app_names         - names for games first seen in the top-100 chart
+    review_themes           - how many recent reviews mention each theme (performance, bugs, ...)
 
 The data here is tiny (a handful of games), so at the end I collect the rows to
 the driver and hand plain Python dicts to the quality and load steps. With real
@@ -161,8 +165,68 @@ TWITCH_SCHEMA = T.StructType(
     ]
 )
 
+MARKET_SCHEMA = T.StructType(
+    _ENVELOPE_FIELDS
+    + [
+        T.StructField(
+            "payload",
+            T.StructType(
+                [
+                    T.StructField("rollup_date", T.LongType()),
+                    T.StructField(
+                        "ranks",
+                        T.ArrayType(
+                            T.StructType(
+                                [
+                                    T.StructField("rank", T.IntegerType()),
+                                    T.StructField("appid", T.LongType()),
+                                    T.StructField("last_week_rank", T.IntegerType()),
+                                    T.StructField("peak_in_game", T.LongType()),
+                                    T.StructField("current_players", T.LongType()),
+                                    T.StructField("name", T.StringType()),
+                                ]
+                            )
+                        ),
+                    ),
+                ]
+            ),
+        )
+    ]
+)
+
+_REVIEW_ITEM = T.ArrayType(
+    T.StructType(
+        [
+            T.StructField("recommendationid", T.StringType()),
+            T.StructField("language", T.StringType()),
+            T.StructField("review", T.StringType()),
+            T.StructField("timestamp_created", T.LongType()),
+            T.StructField("voted_up", T.BooleanType()),
+        ]
+    )
+)
+
+# Review text comes from the same Steam endpoint as the summary; like the summary, the
+# list may sit at the top level or under "response", so both are declared.
+REVIEW_TEXT_SCHEMA = T.StructType(
+    _ENVELOPE_FIELDS
+    + [
+        T.StructField(
+            "payload",
+            T.StructType(
+                [
+                    T.StructField("reviews", _REVIEW_ITEM),
+                    T.StructField("response", T.StructType([T.StructField("reviews", _REVIEW_ITEM)])),
+                ]
+            ),
+        )
+    ]
+)
+
 SCHEMAS = {
     "players": PLAYERS_SCHEMA,
+    "market": MARKET_SCHEMA,
+    "review_text": REVIEW_TEXT_SCHEMA,
     "appdetails": APPDETAILS_SCHEMA,
     "reviews": REVIEWS_SCHEMA,
     "twitch": TWITCH_SCHEMA,
@@ -175,6 +239,9 @@ CLEAN_TABLES = (
     "app_prices",
     "review_summary",
     "twitch_viewer_snapshots",
+    "market_snapshots",
+    "steam_app_names",
+    "review_themes",
 )
 
 
@@ -328,6 +395,98 @@ def transform_review_summary(reviews_raw: DataFrame) -> DataFrame:
     )
 
 
+def transform_market_snapshots(market_raw: DataFrame) -> DataFrame:
+    """Explode each top-100 snapshot into one row per (game, fetch)."""
+    df = _with_common_columns(market_raw)
+    return (
+        df.select("captured_at", "snapshot_date", F.explode("payload.ranks").alias("r"))
+        .select(
+            F.col("r.appid").cast("int").alias("app_id"),
+            "captured_at",
+            "snapshot_date",
+            F.col("r.rank").alias("rank"),
+            F.col("r.last_week_rank").alias("last_week_rank"),
+            F.col("r.peak_in_game").cast("int").alias("peak_in_game"),
+            F.col("r.current_players").cast("int").alias("current_players"),
+        )
+        .filter(F.col("app_id").isNotNull() & F.col("rank").isNotNull())
+        .dropDuplicates(["app_id", "captured_at"])
+    )
+
+
+def transform_steam_app_names(market_raw: DataFrame) -> DataFrame:
+    """Names learned from the market extract (first time a game shows up in the chart)."""
+    df = _with_common_columns(market_raw)
+    rows = df.select("captured_at", F.explode("payload.ranks").alias("r")).filter(
+        F.col("r.name").isNotNull() & (F.length(F.trim(F.col("r.name"))) > 0)
+    )
+    w = Window.partitionBy("app_id").orderBy(F.col("first_seen_at"))
+    return (
+        rows.select(
+            F.col("r.appid").cast("int").alias("app_id"),
+            F.trim(F.col("r.name")).alias("name"),
+            F.col("captured_at").alias("first_seen_at"),
+        )
+        .withColumn("_rn", F.row_number().over(w))
+        .filter("_rn = 1")
+        .drop("_rn")
+    )
+
+
+def load_review_themes(path: Path | None = None) -> tuple[str, dict[str, str]]:
+    """Read the versioned theme dictionary (config/review_themes.json)."""
+    import json
+
+    from pipeline.config import PROJECT_ROOT
+
+    cfg = json.loads((path or PROJECT_ROOT / "config" / "review_themes.json").read_text(encoding="utf-8"))
+    return str(cfg["version"]), dict(cfg["themes"])
+
+
+def transform_review_themes(review_text_raw: DataFrame, themes: dict[str, str], version: str) -> DataFrame:
+    """Count how many recent reviews mention each theme, split by thumbs up / down.
+
+    Only counts leave this function: review text and reviewer ids never reach the
+    database or the public warehouse files (data minimisation).
+    """
+    latest = _latest_per_app_day(_with_common_columns(review_text_raw))
+    reviews = (
+        latest.select(
+            "app_id",
+            "snapshot_date",
+            F.explode(F.coalesce(F.col("payload.reviews"), F.col("payload.response.reviews"))).alias("rv"),
+        )
+        .select(
+            "app_id",
+            "snapshot_date",
+            F.col("rv.recommendationid").alias("review_id"),
+            F.lower(F.coalesce(F.col("rv.review"), F.lit(""))).alias("body"),
+            F.coalesce(F.col("rv.voted_up"), F.lit(True)).alias("voted_up"),
+        )
+        .dropDuplicates(["app_id", "snapshot_date", "review_id"])
+    )
+    sampled = reviews.groupBy("app_id", "snapshot_date").agg(F.count("*").cast("int").alias("reviews_sampled"))
+    # One (theme, matched) pair per review per theme, then aggregate: a single pass in Spark.
+    tagged = reviews.select(
+        "app_id",
+        "snapshot_date",
+        "voted_up",
+        F.explode(
+            F.array(
+                *[
+                    F.struct(F.lit(name).alias("theme"), F.col("body").rlike(f"(?i){pattern}").alias("hit"))
+                    for name, pattern in sorted(themes.items())
+                ]
+            )
+        ).alias("t"),
+    )
+    counts = tagged.groupBy("app_id", "snapshot_date", F.col("t.theme").alias("theme")).agg(
+        F.sum(F.col("t.hit").cast("int")).cast("int").alias("mentions"),
+        F.sum((F.col("t.hit") & ~F.col("voted_up")).cast("int")).cast("int").alias("negative_mentions"),
+    )
+    return counts.join(sampled, ["app_id", "snapshot_date"]).withColumn("theme_version", F.lit(version))
+
+
 # ---- job entry point --------------------------------------------------------
 
 
@@ -355,6 +514,9 @@ def run_transform(
     appdetails = read_source(spark, raw_root, "appdetails", snapshot_date)
     reviews = read_source(spark, raw_root, "reviews", snapshot_date)
     twitch = read_source(spark, raw_root, "twitch", snapshot_date)
+    market = read_source(spark, raw_root, "market", snapshot_date)
+    review_text = read_source(spark, raw_root, "review_text", snapshot_date)
+    theme_version, themes = load_review_themes()
 
     snapshots = transform_player_snapshots(players).cache()
     tables: dict[str, DataFrame] = {
@@ -364,6 +526,9 @@ def run_transform(
         "app_prices": transform_app_prices(appdetails),
         "review_summary": transform_review_summary(reviews),
         "twitch_viewer_snapshots": transform_twitch_snapshots(twitch),
+        "market_snapshots": transform_market_snapshots(market),
+        "steam_app_names": transform_steam_app_names(market),
+        "review_themes": transform_review_themes(review_text, themes, theme_version),
     }
 
     if clean_root is not None:

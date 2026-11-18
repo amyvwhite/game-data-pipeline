@@ -6,6 +6,9 @@
                           still produces correct daily min/max/avg
 * detect_anomalies      - run sql/queries/09_player_anomalies.sql and save new hits;
                           returns only the new ones so each anomaly alerts once
+* refresh_market_daily  - roll the hourly top-100 snapshots up to one row per game per day
+* apply_retention       - drop hourly market rows older than MARKET_RETENTION_DAYS
+                          (the daily rollup keeps the long-term history)
 """
 
 from __future__ import annotations
@@ -68,6 +71,40 @@ def refresh_player_daily(engine: Engine, run_date: date) -> None:
         conn.execute(text(REFRESH_DAILY_SQL), {"run_date": run_date})
 
 
+MARKET_RETENTION_DAYS = 30
+
+REFRESH_MARKET_DAILY_SQL = """
+INSERT INTO market_daily (app_id, snapshot_date, best_rank, avg_players, max_players, snapshot_count)
+SELECT app_id, snapshot_date,
+       MIN(rank), ROUND(AVG(current_players), 1), MAX(current_players), COUNT(*)
+FROM market_snapshots
+WHERE snapshot_date = :run_date
+GROUP BY app_id, snapshot_date
+ON CONFLICT (app_id, snapshot_date) DO UPDATE SET
+    best_rank = EXCLUDED.best_rank,
+    avg_players = EXCLUDED.avg_players,
+    max_players = EXCLUDED.max_players,
+    snapshot_count = EXCLUDED.snapshot_count
+"""
+
+
+def refresh_market_daily(engine: Engine, run_date: date) -> None:
+    with engine.begin() as conn:
+        conn.execute(text(REFRESH_MARKET_DAILY_SQL), {"run_date": run_date})
+
+
+def apply_retention(engine: Engine, run_date: date, days: int = MARKET_RETENTION_DAYS) -> int:
+    """Delete hourly market rows older than the retention window. Returns rows deleted."""
+    with engine.begin() as conn:
+        deleted = conn.execute(
+            text("DELETE FROM market_snapshots WHERE snapshot_date < CAST(:d AS DATE) - CAST(:days AS INTEGER)"),
+            {"d": run_date, "days": days},
+        ).rowcount
+    if deleted:
+        log.info("Retention: removed %d market snapshot rows older than %d days", deleted, days)
+    return deleted or 0
+
+
 def detect_anomalies(engine: Engine) -> list[dict[str, Any]]:
     """Find unusual player counts in the latest snapshots and store the new ones."""
     candidates = read_query("09_player_anomalies.sql")
@@ -84,7 +121,9 @@ def detect_anomalies(engine: Engine) -> list[dict[str, Any]]:
     with engine.begin() as conn:
         rows = [dict(r._mapping) for r in conn.execute(text(sql))]
         if rows:
-            names = dict(conn.execute(text("SELECT app_id, name FROM tracked_apps")).all())
+            names: dict[int, str] = {
+                int(a): str(n) for a, n in conn.execute(text("SELECT app_id, name FROM tracked_apps")).all()
+            }
             for r in rows:
                 r["name"] = names.get(r["app_id"], str(r["app_id"]))
     for r in rows:

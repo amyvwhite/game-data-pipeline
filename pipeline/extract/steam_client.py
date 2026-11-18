@@ -11,6 +11,12 @@ Endpoints (checked against Valve's Steamworks docs and community docs, Nov 2026)
 * Review summary   - GET https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/?input_json={...}
   The replacement for the deprecated store.steampowered.com/appreviews/<id>?json=1 endpoint.
   query_summary (total_positive, total_negative, ...) only comes back on the first page.
+  The same endpoint with filter=Recent (1) and num_per_page<=100 returns review text
+  (field "review", plus voted_up, timestamp_created, language) for the theme analysis.
+* Most played      - GET https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/
+  No API key needed. Returns {"response": {"rollup_date": <unix>, "ranks": [{"rank", "appid",
+  "last_week_rank", "peak_in_game"}, ...]}} for the top 100 games. No names, so names come
+  from appdetails (filters=basic) the first time an app is seen.
 
 The client handles timeouts, retries with exponential backoff, HTTP 429 (honours
 Retry-After), and spaces requests out so we stay polite.
@@ -31,6 +37,10 @@ log = logging.getLogger(__name__)
 PLAYERS_URL = "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/"
 APPDETAILS_URL = "https://store.steampowered.com/api/appdetails"
 REVIEWS_URL = "https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/"
+MOST_PLAYED_URL = "https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/"
+
+REVIEW_FILTER_RECENT = 1  # EUserReviewsAppReviewsFilter.Recent
+PURCHASE_TYPE_ALL = 1  # EUserReviewsPurchaseType.All
 
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 
@@ -79,6 +89,30 @@ class SteamClient:
             "languages": ["all"],
         }
         return self._get_json(REVIEWS_URL, {"input_json": json.dumps(params)})
+
+    def get_recent_reviews(self, app_id: int, count: int = 100, language: str = "english") -> dict[str, Any]:
+        """Most recent reviews with their text (one page, max 100). Used for theme tagging."""
+        params = {
+            "appid": app_id,
+            "filter": REVIEW_FILTER_RECENT,
+            "num_per_page": max(1, min(count, 100)),
+            "review_type": 0,
+            "purchase_type": PURCHASE_TYPE_ALL,
+            "languages": [language],
+        }
+        return self._get_json(REVIEWS_URL, {"input_json": json.dumps(params)})
+
+    def get_most_played(self) -> dict[str, Any]:
+        """Steam's top 100 most played games (rank, appid, peak). No names."""
+        return self._get_json(MOST_PLAYED_URL, {})
+
+    def get_app_name(self, app_id: int) -> str | None:
+        """Just the store name for an app (appdetails with filters=basic). None if Steam has no entry."""
+        data = self._get_json(APPDETAILS_URL, {"appids": app_id, "filters": "basic", "l": "english"})
+        entry = (data or {}).get(str(app_id)) or {}
+        if not entry.get("success"):
+            return None
+        return (entry.get("data") or {}).get("name")
 
     # ---- internals ------------------------------------------------------
 

@@ -39,6 +39,17 @@ BASELINES = {
     1091500: (30_000, 7999),
     -6: (150_000, 0),  # GTA VI: Twitch only (base used for viewer numbers)
 }
+FILLER_GAMES = 100  # synthetic "rest of Steam" games so the top-100 chart has 100 rows
+REVIEW_SNIPPETS = [  # (text, thumbs up?) - invented, used only to exercise the theme model
+    ("Great story and an amazing open world", True),
+    ("Stutters and fps drops since the last update", False),
+    ("Crashes on launch every time", False),
+    ("Worth it on sale, great value", True),
+    ("Too many microtransactions and shark cards", False),
+    ("Servers are full of cheaters", False),
+    ("The launcher keeps asking me to log in", False),
+    ("Fun with friends, love the multiplayer", True),
+]
 SPIKE_APP = 3240220  # on the last day this game gets an evening spike, so the anomaly alert has something to find
 
 
@@ -139,6 +150,64 @@ def synthetic_day(
     )
 
 
+def synthetic_reviews(store: LocalStore, app_id: int, day: date, rng: random.Random) -> None:
+    at = datetime(day.year, day.month, day.day, 12, 5, tzinfo=timezone.utc)
+    # Each game leans on a couple of themes so the table has some shape.
+    weights = [3 if (i + app_id) % 4 == 0 else 1 for i in range(len(REVIEW_SNIPPETS))]
+    picks = rng.choices(REVIEW_SNIPPETS, weights=weights, k=100)
+    reviews = [
+        {
+            "recommendationid": f"{app_id}{day:%m%d}{i:03d}",
+            "language": "english",
+            "review": text,
+            "timestamp_created": int(at.timestamp()) - i * 60,
+            "voted_up": up,
+        }
+        for i, (text, up) in enumerate(picks)
+    ]
+    env = {
+        "source": "review_text",
+        "app_id": app_id,
+        "snapshot_date": day.isoformat(),
+        "fetched_at": at.isoformat(),
+        "synthetic": True,
+        "payload": {"reviews": reviews},
+    }
+    store.write_json(raw_key("review_text", day, app_id, at), env)
+
+
+def synthetic_market(store: LocalStore, apps, day: date, day_index: int, rng: random.Random) -> None:
+    """24 hourly top-100 snapshots: the tracked Steam games plus invented filler games."""
+    games = [(a.app_id, a.name, BASELINES.get(a.app_id, (10_000, 0))[0]) for a in apps if a.app_id > 0]
+    games += [(900_000 + i, f"Synthetic Game {i + 1}", int(900_000 / (i + 1.5))) for i in range(FILLER_GAMES)]
+    for hour in range(24):
+        at = datetime(day.year, day.month, day.day, hour, 18, tzinfo=timezone.utc)
+        wave = 1 + 0.35 * math.sin((hour - 19) / 24 * 2 * math.pi + math.pi / 2)
+        now = sorted(
+            ((gid, name, int(base * wave * rng.uniform(0.9, 1.1))) for gid, name, base in games), key=lambda g: -g[2]
+        )[:100]
+        ranks = [
+            {
+                "rank": i + 1,
+                "appid": gid,
+                "last_week_rank": max(1, i + 1 + rng.randint(-3, 3)),
+                "peak_in_game": int(players * 1.3),
+                "current_players": players,
+                "name": name if day_index == 0 and hour == 0 else None,
+            }
+            for i, (gid, name, players) in enumerate(now)
+        ]
+        env = {
+            "source": "market",
+            "app_id": 0,
+            "snapshot_date": day.isoformat(),
+            "fetched_at": at.isoformat(),
+            "synthetic": True,
+            "payload": {"rollup_date": int(at.timestamp()), "ranks": ranks},
+        }
+        store.write_json(raw_key("market", day, 0, at), env)
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--days", type=int, default=21)
@@ -154,6 +223,9 @@ def main() -> int:
     for i, day in enumerate(days):
         for app in settings.apps:
             synthetic_day(store, app.app_id, app.name, day, i, len(days), rng)
+            if app.steam:
+                synthetic_reviews(store, app.app_id, day, rng)
+        synthetic_market(store, settings.apps, day, i, rng)
     print(f"Wrote synthetic raw data for {len(days)} days ({days[0]} to {days[-1]}) under {settings.raw_dir}")
 
     if args.run:
@@ -166,9 +238,15 @@ def main() -> int:
             if code != 0:
                 print(f"Pipeline failed for {day} (exit {code})")
                 return code
+        from pipeline.forecast import backfill_forecasts
+
+        engine = get_engine(settings.database_url)
+        start = datetime(days[0].year, days[0].month, days[0].day, tzinfo=timezone.utc) + timedelta(days=2)
+        end = datetime(days[-1].year, days[-1].month, days[-1].day, 23, tzinfo=timezone.utc)
+        print(f"Backfilled {backfill_forecasts(engine, start, end)} forecast rows")
         # Re-export with the sample flag so the dashboard shows a "synthetic data" banner.
         export_dashboard_summary(
-            get_engine(settings.database_url),
+            engine,
             days[-1],
             settings.dashboard_export_path,
             is_sample=True,

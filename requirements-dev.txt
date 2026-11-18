@@ -3,3 +3,6 @@ pytest~=9.1.0
 responses~=0.26.0       # mocks HTTP calls to Steam
 moto[s3]~=5.2.0         # fakes S3 in tests
 ruff~=0.17.0
+mypy~=2.3.0            # static type checks (CI)
+pytest-cov~=7.1.0      # coverage report + minimum in CI
+pre-commit~=4.0        # optional: run the same checks before each commit

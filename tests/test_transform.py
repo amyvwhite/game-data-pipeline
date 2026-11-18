@@ -130,3 +130,32 @@ def test_timestamps_come_back_as_utc_whatever_the_machine_timezone(spark, raw_st
         assert row["captured_at"].tzinfo is not None
         assert row["captured_at"].utcoffset() == timedelta(0)
     assert FETCHED_AT in {r["captured_at"] for r in tables["player_count_snapshots"]}
+
+
+def test_market_snapshot_explodes_the_top_100(spark, raw_store):
+    tables = run_transform(spark, raw_store.root / "raw", RUN_DATE)
+    market = {r["app_id"]: r for r in tables["market_snapshots"]}
+    assert set(market) == {730, RDR2.app_id, CIV6.app_id}
+    assert market[730]["rank"] == 1 and market[730]["current_players"] == 1201278
+    assert market[RDR2.app_id]["last_week_rank"] == 3
+    names = {r["app_id"]: r["name"] for r in tables["steam_app_names"]}
+    assert names[730] == "Counter-Strike 2"
+
+
+def test_review_themes_count_mentions_but_keep_no_text(spark, raw_store):
+    tables = run_transform(spark, raw_store.root / "raw", RUN_DATE)
+    rows = {(r["app_id"], r["theme"]): r for r in tables["review_themes"]}
+    perf = rows[(RDR2.app_id, "performance")]
+    assert perf["reviews_sampled"] == 5 and perf["mentions"] == 1 and perf["negative_mentions"] == 1
+    assert rows[(RDR2.app_id, "bugs_crashes")]["mentions"] == 1
+    assert rows[(RDR2.app_id, "servers_online")]["mentions"] == 1
+    assert rows[(RDR2.app_id, "price_value")]["negative_mentions"] == 0  # "worth it on sale" was a thumbs up
+    # The second fixture nests reviews under "response"; both layouts must parse.
+    assert rows[(CIV6.app_id, "launcher_drm")]["mentions"] == 1
+    assert rows[(CIV6.app_id, "price_value")]["negative_mentions"] == 1
+    # Only counts leave Spark.
+    assert all(
+        set(r)
+        == {"app_id", "snapshot_date", "theme", "theme_version", "reviews_sampled", "mentions", "negative_mentions"}
+        for r in tables["review_themes"]
+    )

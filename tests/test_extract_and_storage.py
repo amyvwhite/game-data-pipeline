@@ -15,7 +15,7 @@ def test_raw_key_layout():
 
 def test_extract_writes_envelopes(raw_store):
     keys = raw_store.list_keys("raw")
-    assert len(keys) == 6  # 3 sources x 2 apps
+    assert len(keys) == 9  # 4 per-app sources x 2 apps + 1 market snapshot (no Twitch client given)
     env = raw_store.read_json("raw/players/dt=2026-11-18/1174180_20261118T140000Z.json")
     assert env["app_id"] == 1174180
     assert env["source"] == "players"
@@ -91,3 +91,29 @@ def test_twitch_only_game_gets_no_steam_calls(tmp_path):
     result = _run(steam, _Store(tmp_path), apps, _date(2026, 11, 18), sources=("players", "twitch"), twitch=Twitch())
     assert steam.calls == [1]
     assert sum("raw/twitch/" in w.replace("\\", "/") for w in result.written) == 2
+
+
+def test_market_extract_collects_players_and_new_names_only(tmp_path):
+    store = LocalStore(tmp_path)
+    result = run_extract(
+        FakeSteamClient(),
+        store,
+        [RDR2, CIV6],
+        RUN_DATE,
+        sources=("market",),
+        now=FETCHED_AT,
+        known_names={RDR2.app_id, CIV6.app_id},
+    )
+    assert result.failures == []
+    (key,) = store.list_keys("raw/market")
+    env = store.read_json(key)
+    ranks = {r["appid"]: r for r in env["payload"]["ranks"]}
+    assert ranks[730]["current_players"] == 1201278
+    assert ranks[730]["name"] == "Counter-Strike 2"
+    assert ranks[RDR2.app_id]["name"] is None  # already known: no extra request
+
+
+def test_market_chart_failure_is_reported_not_raised(tmp_path):
+    client = FakeSteamClient(overrides={("market", 0): SteamAPIError("down")})
+    result = run_extract(client, LocalStore(tmp_path), [RDR2], RUN_DATE, sources=("market",), now=FETCHED_AT)
+    assert result.written == [] and result.failures == [("market", 0, "down")]

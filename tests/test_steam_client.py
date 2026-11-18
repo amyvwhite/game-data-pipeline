@@ -7,6 +7,7 @@ import responses
 
 from pipeline.extract.steam_client import (
     APPDETAILS_URL,
+    MOST_PLAYED_URL,
     PLAYERS_URL,
     REVIEWS_URL,
     SteamAPIError,
@@ -107,3 +108,24 @@ def test_throttle_spaces_out_requests():
     c._last_request_at = clock()
     c._throttle()
     assert slept == [pytest.approx(1.3)]
+
+
+@responses.activate
+def test_recent_reviews_asks_for_recent_text(client):
+    responses.get(REVIEWS_URL, json=load_fixture("review_text_1174180.json"))
+    data = client.get_recent_reviews(1174180, count=500)
+    sent = json.loads(parse_qs(urlparse(responses.calls[0].request.url).query)["input_json"][0])
+    assert sent["filter"] == 1 and sent["num_per_page"] == 100  # Recent; capped at Steam's max
+    assert sent["purchase_type"] == 1 and sent["languages"] == ["english"]
+    assert len(data["reviews"]) == 5
+
+
+@responses.activate
+def test_most_played_and_app_name(client):
+    responses.get(MOST_PLAYED_URL, json=load_fixture("market_chart.json"))
+    responses.get(APPDETAILS_URL, json=load_fixture("appname_730.json"))
+    responses.get(APPDETAILS_URL, json={"999": {"success": False}})
+    assert len(client.get_most_played()["response"]["ranks"]) == 3
+    assert client.get_app_name(730) == "Counter-Strike 2"
+    assert parse_qs(urlparse(responses.calls[1].request.url).query)["filters"] == ["basic"]
+    assert client.get_app_name(999) is None

@@ -1,7 +1,7 @@
 [project]
 name = "game-data-pipeline"
-version = "0.1.0"
-description = "Daily pipeline for public Steam game data: extract, PySpark transform, quality checks, Postgres load."
+version = "0.2.0"
+description = "Hourly pipeline for public Steam and Twitch game data: extract, PySpark transform, quality checks, Postgres load, forecasts and a live dashboard."
 requires-python = ">=3.11"
 
 [tool.ruff]
@@ -22,3 +22,17 @@ markers = [
 filterwarnings = [
     "ignore::DeprecationWarning:pyspark.*",
 ]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true   # pyspark / boto3 ship partial or no stubs
+warn_unused_ignores = true
+files = ["pipeline"]
+
+[tool.coverage.run]
+source = ["pipeline"]
+branch = false
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = false

@@ -53,6 +53,21 @@ class FakeSteamClient:
     def get_review_summary(self, app_id: int) -> dict:
         return self._get("reviews", app_id)
 
+    def get_recent_reviews(self, app_id: int, count: int = 100, language: str = "english") -> dict:
+        return self._get("review_text", app_id)
+
+    def get_most_played(self) -> dict:
+        if ("market", 0) in self.overrides:
+            return self._get("market", 0)
+        return load_fixture("market_chart.json")
+
+    def get_app_name(self, app_id: int) -> str | None:
+        for name in (f"appname_{app_id}.json", f"appdetails_{app_id}.json"):
+            if (FIXTURES / name).exists():
+                entry = load_fixture(name)[str(app_id)]
+                return entry["data"]["name"] if entry.get("success") else None
+        return None
+
 
 @pytest.fixture
 def raw_store(tmp_path: Path) -> LocalStore:

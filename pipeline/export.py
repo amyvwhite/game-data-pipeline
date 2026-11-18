@@ -112,6 +112,56 @@ FROM player_count_snapshots
 """
 
 
+FORECAST_SERIES_SQL = f"""
+WITH bounds AS (SELECT MAX(captured_at) AS last_at FROM player_count_snapshots),
+champion AS (SELECT app_id, champion AS model FROM ({read_query("13_forecast_accuracy.sql")}) acc),
+actual AS (
+    SELECT app_id, date_trunc('hour', captured_at, 'UTC') AS hour, ROUND(AVG(player_count)) AS players
+    FROM player_count_snapshots, bounds
+    WHERE captured_at > bounds.last_at - INTERVAL '48 hours'
+    GROUP BY app_id, hour
+)
+SELECT COALESCE(a.app_id, f.app_id) AS app_id,
+       COALESCE(a.hour, f.target_hour) AS hour,
+       a.players                       AS actual,
+       f.predicted                     AS forecast,
+       f.model                         AS model
+FROM actual a
+FULL OUTER JOIN (
+    -- each game's champion model; ensemble until there's enough history to score
+    SELECT p.app_id, p.target_hour, p.predicted, p.model
+    FROM player_forecasts p
+    CROSS JOIN bounds
+    LEFT JOIN champion c ON c.app_id = p.app_id
+    WHERE p.model = COALESCE(c.model, 'ensemble') AND p.target_hour > bounds.last_at - INTERVAL '48 hours'
+) f ON f.app_id = a.app_id AND f.target_hour = a.hour
+ORDER BY app_id, hour
+"""
+
+MARKET_SHARE_TOP100_SQL = """
+SELECT m.snapshot_date,
+       COALESCE(NULLIF(t.publisher_group, ''), 'Other') AS publisher_group,
+       ROUND(SUM(m.avg_players))                        AS avg_players,
+       ROUND(100.0 * SUM(m.avg_players) / NULLIF(SUM(SUM(m.avg_players)) OVER (PARTITION BY m.snapshot_date), 0), 2)
+                                                        AS share_pct
+FROM market_daily m
+LEFT JOIN tracked_apps t USING (app_id)
+GROUP BY m.snapshot_date, 2
+ORDER BY m.snapshot_date, 2
+"""
+
+REVIEW_THEMES_SQL = """
+SELECT r.app_id, COALESCE(t.name, r.app_id::text) AS name, r.snapshot_date, r.theme, r.theme_version,
+       r.reviews_sampled, r.mentions, r.negative_mentions,
+       ROUND(100.0 * r.mentions / NULLIF(r.reviews_sampled, 0), 1)            AS mention_pct,
+       ROUND(100.0 * r.negative_mentions / NULLIF(r.mentions, 0), 1)          AS negative_share_pct
+FROM review_themes r
+LEFT JOIN tracked_apps t USING (app_id)
+WHERE r.snapshot_date = (SELECT MAX(snapshot_date) FROM review_themes)
+ORDER BY r.app_id, r.theme
+"""
+
+
 def export_dashboard_summary(
     engine: Engine,
     run_date: date,
@@ -138,6 +188,12 @@ def export_dashboard_summary(
         "twitch_vs_players": _query(engine, read_query("11_twitch_vs_players.sql"), run_date),
         "recent_runs": _query(engine, RECENT_RUNS_SQL, run_date),
         "launch_watch": _query(engine, read_query("12_gta6_launch_watch.sql"), run_date),
+        "forecast_series": _query(engine, FORECAST_SERIES_SQL, run_date),
+        "forecast_accuracy": _query(engine, read_query("13_forecast_accuracy.sql"), run_date),
+        "sale_lift": _query(engine, read_query("14_sale_lift.sql"), run_date),
+        "top100": _query(engine, read_query("15_steam_top100.sql"), run_date),
+        "top100_share": _query(engine, MARKET_SHARE_TOP100_SQL, run_date),
+        "review_themes": _query(engine, REVIEW_THEMES_SQL, run_date),
     }
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)

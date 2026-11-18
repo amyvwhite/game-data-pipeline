@@ -227,3 +227,39 @@ def test_purchasable_app_without_price_is_critical():
     results = {r.name: r for r in check_price_values(rows)}
     assert not results["price_present"].passed
     assert results["price_present"].severity.value == "critical"
+
+
+def _market(n=100, **override):
+    at = "2026-11-18T14:00:00Z"
+    return [{"app_id": i, "captured_at": at, "rank": i, "current_players": 1000, **override} for i in range(1, n + 1)]
+
+
+def test_full_market_chart_passes():
+    from pipeline.quality.checks import check_market_values
+
+    assert all(r.passed for r in check_market_values(_market()))
+
+
+def test_thin_market_chart_is_only_a_warning():
+    from pipeline.quality.checks import check_market_values
+
+    failed = [r for r in check_market_values(_market(40)) if not r.passed]
+    assert [(r.name, r.severity) for r in failed] == [("chart_size", Severity.WARNING)]
+
+
+def test_negative_market_players_are_critical():
+    from pipeline.quality.checks import check_market_values
+
+    failed = [r for r in check_market_values(_market(current_players=-1)) if not r.passed]
+    assert ("non_negative", Severity.CRITICAL) in [(r.name, r.severity) for r in failed]
+
+
+def test_theme_counts_must_be_consistent():
+    from pipeline.quality.checks import check_theme_values
+
+    good = {"app_id": 1, "theme": "bugs", "reviews_sampled": 100, "mentions": 10, "negative_mentions": 8}
+    bad = {**good, "theme": "price", "negative_mentions": 11}
+    thin = {**good, "app_id": 2, "reviews_sampled": 10, "mentions": 1, "negative_mentions": 0}
+    results = {r.name: r for r in check_theme_values([good, bad, thin])}
+    assert not results["counts_consistent"].passed and results["counts_consistent"].severity == Severity.CRITICAL
+    assert not results["sample_size"].passed and results["sample_size"].severity == Severity.WARNING

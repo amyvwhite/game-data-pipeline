@@ -14,7 +14,13 @@ from pathlib import Path
 import pytest
 from sqlalchemy import text
 
-from pipeline.analysis import detect_anomalies, refresh_player_daily, sync_tracked_apps
+from pipeline.analysis import (
+    apply_retention,
+    detect_anomalies,
+    refresh_market_daily,
+    refresh_player_daily,
+    sync_tracked_apps,
+)
 from pipeline.config import AppConfig
 from pipeline.export import export_dashboard_summary
 from pipeline.load.postgres_loader import (
@@ -37,7 +43,7 @@ START = date(2026, 11, 1)
 def engine():
     eng = get_engine(DB_URL)
     with eng.begin() as conn:
-        for t in [*TABLES, "pipeline_runs", "player_anomalies", "tracked_apps"]:
+        for t in [*TABLES, "pipeline_runs", "player_anomalies", "tracked_apps", "player_forecasts", "market_daily"]:
             conn.exec_driver_sql(f"DROP TABLE IF EXISTS {t} CASCADE")
     init_schema(eng)
     yield eng
@@ -75,6 +81,41 @@ def day_tables(d: date, price: int, players: int) -> dict:
                 "truncated": False,
             }
             for s in snaps
+        ],
+        "market_snapshots": [
+            row
+            for s in snaps
+            for row in (
+                {
+                    **{k: s[k] for k in ("captured_at", "snapshot_date")},
+                    "app_id": 730,
+                    "rank": 1,
+                    "last_week_rank": 1,
+                    "peak_in_game": 1_400_000,
+                    "current_players": 1_000_000,
+                },
+                {
+                    **{k: s[k] for k in ("captured_at", "snapshot_date")},
+                    "app_id": 1,
+                    "rank": 7,
+                    "last_week_rank": 8,
+                    "peak_in_game": players + 300,
+                    "current_players": s["player_count"],
+                },
+            )
+        ],
+        "steam_app_names": [{"app_id": 730, "name": "Counter-Strike 2", "first_seen_at": snaps[0]["captured_at"]}],
+        "review_themes": [
+            {
+                "app_id": 1,
+                "snapshot_date": d,
+                "theme": theme,
+                "theme_version": "test",
+                "reviews_sampled": 100,
+                "mentions": m,
+                "negative_mentions": n,
+            }
+            for theme, m, n in (("performance", 30, 25), ("content_story", 40, 5))
         ],
         "player_counts_daily": [
             {
@@ -121,6 +162,18 @@ def load_history(engine, days=10, spike=True):
         d = START + timedelta(days=i)
         price = 2639 if 3 <= i <= 5 else 7999  # a sale in the middle
         load_tables(engine, day_tables(d, price, 30000 + i * 500))
+        refresh_market_daily(engine, d)
+    # Stored forecasts for every snapshot hour so the accuracy query has something to score.
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                "INSERT INTO player_forecasts (app_id, target_hour, model, predicted, made_at) "
+                "SELECT app_id, date_trunc('hour', captured_at, 'UTC'), m.model, player_count * m.factor, "
+                "captured_at - INTERVAL '24 hours' FROM player_count_snapshots "
+                "CROSS JOIN (VALUES ('seasonal_profile', 1.05), ('naive_24h', 1.20)) AS m(model, factor) "
+                "ON CONFLICT DO NOTHING"
+            )
+        )
     if spike:
         # Last day, 21:00 UTC: double the usual evening count -> should be flagged as an anomaly.
         last = START + timedelta(days=days - 1)
@@ -254,10 +307,123 @@ def test_auto_sources(engine):
     no_twitch = Settings(apps=TRACKED)
     with_twitch = Settings(apps=TRACKED, twitch_client_id="id", twitch_client_secret="secret")
     # Nothing loaded today yet -> everything.
-    assert resolve_sources("auto", with_twitch, engine, START) == ("players", "appdetails", "reviews", "twitch")
+    assert resolve_sources("auto", with_twitch, engine, START) == (
+        "players",
+        "appdetails",
+        "reviews",
+        "twitch",
+        "market",
+        "review_text",
+    )
     load_history(engine, days=1, spike=False)
     # Prices for START are in -> hourly mode only.
-    assert resolve_sources("auto", with_twitch, engine, START) == ("players", "twitch")
-    assert resolve_sources("auto", no_twitch, engine, START) == ("players",)
+    assert resolve_sources("auto", with_twitch, engine, START) == ("players", "twitch", "market")
+    assert resolve_sources("auto", no_twitch, engine, START) == ("players", "market")
     # Re-processing saved raw data doesn't need Twitch credentials.
     assert "twitch" in resolve_sources("players,twitch", no_twitch, engine, START, extracting=False)
+
+
+# ---- new in 0.2: forecasts, sale lift, market, review themes ----------------
+
+
+def test_forecast_accuracy_scores_model_against_baseline(engine):
+    load_history(engine, spike=False)
+    with engine.connect() as conn:
+        row = conn.exec_driver_sql((QUERIES_DIR / "13_forecast_accuracy.sql").read_text()).mappings().one()
+    assert row["champion"] == "seasonal_profile"
+    assert float(row["champion_mape_pct"]) == pytest.approx(5.0, abs=0.1)
+    assert float(row["baseline_mape_pct"]) == pytest.approx(20.0, abs=0.1)
+    assert float(row["skill"]) == pytest.approx(0.75, abs=0.01)
+
+
+def test_write_forecasts_once_per_target_hour(engine):
+    from pipeline.forecast import write_forecasts
+
+    sync_tracked_apps(engine, TRACKED)
+    end = datetime(2026, 11, 10, 12, tzinfo=timezone.utc)
+    snaps = [
+        {
+            "app_id": 1,
+            "captured_at": end - timedelta(hours=h),
+            "snapshot_date": (end - timedelta(hours=h)).date(),
+            "player_count": 30000 + 5000 * ((end - timedelta(hours=h)).hour >= 18),
+        }
+        for h in range(0, 24 * 4)
+    ]
+    load_tables(engine, {"player_count_snapshots": snaps})
+    write_forecasts(engine, now=end)
+    write_forecasts(engine, now=end + timedelta(minutes=30))  # same hours again: nothing new
+    with engine.connect() as conn:
+        rows = conn.execute(text("SELECT model, COUNT(*) FROM player_forecasts GROUP BY model ORDER BY model")).all()
+        evening = conn.execute(
+            text("SELECT predicted FROM player_forecasts WHERE model = 'seasonal_profile' AND target_hour = :t"),
+            {"t": datetime(2026, 11, 10, 20, tzinfo=timezone.utc)},
+        ).scalar_one()
+    assert rows == [("ensemble", 24), ("naive_24h", 24), ("seasonal_profile", 24)]
+    assert float(evening) == pytest.approx(35000, rel=0.01)
+
+
+def test_sale_lift_uses_a_control_group(engine):
+    # Game 1 goes on sale on days 3-5 (see load_history). Game 2 never does and is the control.
+    load_history(engine, spike=False)
+    sync_tracked_apps(engine, [*TRACKED, AppConfig(2, "Civilization VI", "Take-Two")])
+    rows = []
+    for i in range(10):
+        d = START + timedelta(days=i)
+        rows.append(
+            {
+                "app_id": 2,
+                "snapshot_date": d,
+                "min_players": 1,
+                "max_players": 1,
+                "avg_players": 10000 * (1.1 if 3 <= i <= 5 else 1.0),
+                "snapshot_count": 1,
+            }
+        )
+    load_tables(
+        engine,
+        {
+            "player_counts_daily": rows,
+            "app_prices": [
+                {
+                    "app_id": 2,
+                    "snapshot_date": r["snapshot_date"],
+                    "currency": "CAD",
+                    "initial_price_cents": 5999,
+                    "final_price_cents": 5999,
+                    "discount_percent": 0,
+                    "is_free": False,
+                }
+                for r in rows
+            ],
+        },
+    )
+    with engine.connect() as conn:
+        row = conn.exec_driver_sql((QUERIES_DIR / "14_sale_lift.sql").read_text()).mappings().one()
+    assert row["app_id"] == 1 and row["sale_start"] == START + timedelta(days=3)
+    assert float(row["control_change_pct"]) == pytest.approx(10.0, abs=0.1)
+    assert float(row["lift_pct_points"]) == pytest.approx(float(row["raw_change_pct"]) - 10.0, abs=0.2)
+
+
+def test_market_rollup_and_retention(engine):
+    load_history(engine, spike=False)
+    with engine.connect() as conn:
+        top = conn.exec_driver_sql((QUERIES_DIR / "15_steam_top100.sql").read_text()).mappings().all()
+        daily = conn.execute(text("SELECT COUNT(*) FROM market_daily")).scalar_one()
+    assert [r["name"] for r in top] == ["Counter-Strike 2", "Red Dead Redemption 2"]
+    assert top[1]["publisher_group"] == "Take-Two" and top[0]["publisher_group"] == "Other"
+    assert daily == 20  # 2 games x 10 days
+    deleted = apply_retention(engine, START + timedelta(days=40))
+    assert deleted == 60  # every hourly row is past the 30-day window...
+    with engine.connect() as conn:
+        assert conn.execute(text("SELECT COUNT(*) FROM market_daily")).scalar_one() == 20  # ...rollup kept
+
+
+def test_dashboard_export_has_new_sections(engine, tmp_path):
+    import json
+
+    load_history(engine, spike=False)
+    data = json.loads(export_dashboard_summary(engine, START + timedelta(days=9), tmp_path / "s.json").read_text())
+    for key in ("forecast_series", "forecast_accuracy", "sale_lift", "top100", "top100_share", "review_themes"):
+        assert key in data, key
+    assert data["top100"] and data["review_themes"] and data["forecast_accuracy"]
