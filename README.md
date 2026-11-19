@@ -13,7 +13,7 @@ alerts, and publishes a dashboard.
 
 **In numbers:** ~3,500 new rows a day across 14 tables · 15 analytical SQL queries · 3 forecast
 models scored out-of-sample · 100+ tests at 88% coverage · lint, type checks and tests in CI ·
-4 architecture decision records. Read the [case study](docs/CASE_STUDY.md) for the story and findings.
+5 architecture decision records · AWS data lake (S3, Glue, Athena) deployed with CloudFormation and OIDC. Read the [case study](docs/CASE_STUDY.md) for the story and findings.
 
 **Questions it answers:**
 
@@ -203,6 +203,28 @@ docker compose up --build
 This starts Postgres, runs the pipeline once for today, and serves the dashboard on
 http://localhost:8000. To run it again: `docker compose run --rm pipeline`.
 
+## AWS data lake (S3 + Glue + Athena)
+
+Every day, the previous day's complete data is exported from Postgres to Parquet on S3 and
+read back by Athena to prove it landed ([ADR 0005](docs/adr/0005-aws-data-lake.md)). It's
+live: `Lake: exported 2026-11-18 - 5 tables, 191 rows` → `Lake verified with Athena: 58
+snapshots for 11 games`.
+
+- **Infrastructure as code:** one CloudFormation template (`infra/aws/stack.yml`) creates an
+  encrypted, private bucket; a Glue catalog using partition projection (no crawlers); an
+  Athena workgroup with a 1 GB per-query limit; and a $1/month budget alert.
+- **No AWS keys anywhere:** GitHub Actions signs in with OIDC to a role that trusts only this
+  repo's `main` branch, matched on GitHub's immutable `repo:owner@id/repo@id` subject, with
+  least-privilege permissions.
+- **Can't drift:** the Glue table definitions and the exporter's schema are generated from
+  the Spark job; CI fails if they disagree and lints the template with `cfn-lint`.
+- **Can't lose data:** the export runs after collection is committed, only on a clean run,
+  and is idempotent (fixed keys plus a per-day done marker).
+- **Costs ~nothing:** about 7 small files a day plus one tiny Athena query (estimated well
+  under $0.05 a month).
+
+Setup steps: [docs/AWS_SETUP.md](docs/AWS_SETUP.md).
+
 ## Use S3 for raw data
 
 Set these in `.env`:
@@ -319,7 +341,8 @@ Known limits, on purpose:
 
 ## Roadmap / next steps
 
-- [ ] Move from CSV-in-git to a hosted Postgres (or S3 + Athena) once the history gets large.
+- [x] Publish the warehouse to S3 + Athena (daily Parquet export, ADR 0005).
+- [ ] Move the system of record from CSV-in-git to a hosted Postgres once the history gets large.
 - [ ] Read `s3a://` directly from Spark (hadoop-aws) instead of copying files locally.
 - [ ] Orchestrate with Airflow (or Step Functions), with retries and backfills per task.
 - [ ] Explain anomalies automatically: match spikes to Steam news/patch notes and sales.

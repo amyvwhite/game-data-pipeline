@@ -25,6 +25,7 @@ An hourly pipeline that runs unattended on GitHub Actions and publishes a live d
 | Load | Idempotent upserts into PostgreSQL in one transaction |
 | Analyse | Anomaly detection, 24-hour forecasts from three models, sale lift against a control group, review themes |
 | Publish | Static dashboard on GitHub Pages; the warehouse is versioned in Git |
+| Data lake | Daily Parquet export to S3, Glue catalog, Athena; deployed with CloudFormation, GitHub OIDC (no stored keys) |
 
 It costs nothing to run: each hour a fresh Postgres container restores the history from
 CSV files in the repo, the pipeline runs, and the updated tables are committed back
@@ -50,6 +51,10 @@ CSV files in the repo, the pipeline runs, and the updated tables are committed b
   Legacy is no longer sold on its own, so Steam sent no price. I modelled "not sold
   separately" explicitly, and a missing price on a game that *is* for sale still fails.
   A thin top-100 chart only warns, because it must never block the core player counts.
+- **Cloud without the bill.** The AWS lake is a daily batch (~7 files a day) behind a $1
+  budget alert, so it costs effectively nothing. The first deploy was refused because GitHub
+  now sends an ID-based identity; I found the exact value in CloudTrail and pinned the role
+  to it, which is also safer than trusting a repo name. ([ADR 0005](adr/0005-aws-data-lake.md))
 - **Plan for growth.** The top-100 snapshot is the fastest-growing table, so hourly rows
   are kept 30 days and rolled up daily forever. ([ADR 0004](adr/0004-market-data-retention.md))
 
@@ -74,5 +79,5 @@ no secrets in code (GitHub Actions secrets only).
 ## What I'd do next
 
 Weekly seasonality in the forecasts once there are two weeks of data; an ML or LLM classifier
-for review themes behind the same table contract; and moving the warehouse from Git to a hosted
-database or S3 with Athena, orchestrated by Airflow, as history grows.
+for review themes behind the same table contract; dbt models on Athena; and moving the system of
+record from Git to a hosted database, orchestrated by Airflow, as history grows.
