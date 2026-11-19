@@ -3,6 +3,12 @@
 All notable changes to this project. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning: [SemVer](https://semver.org/).
 
+## [0.2.1] - 2026-11-19
+
+### Changed
+- Live schedule runs three times an hour (`7,27,47 * * * *`) because GitHub drops scheduled
+  runs under load; see ADR 0001.
+
 ## [0.2.0] - 2026-11-18
 
 ### Added
