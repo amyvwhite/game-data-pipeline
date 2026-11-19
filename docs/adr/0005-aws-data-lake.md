@@ -24,7 +24,10 @@ the account is on AWS's free plan and the budget is effectively $0.
 - **Partition projection** on `snapshot_date`: new days are queryable immediately, with no
   Glue crawler or `MSCK REPAIR` (which would cost money and time).
 - **No stored AWS keys.** GitHub Actions signs in with OIDC to a role that trusts only this
-  repository's `main` branch, with least-privilege permissions (no delete, one bucket, one
+  repository's `main` branch, matched on GitHub's immutable subject
+  (`repo:owner@<id>/repo@<id>`). The first deploy used the name-only form and was refused;
+  CloudTrail's failed `AssumeRoleWithWebIdentity` event showed the real subject. IDs also
+  stop a deleted-and-recreated repo with the same name from inheriting access, with least-privilege permissions (no delete, one bucket, one
   workgroup, read-only catalog).
 - **Cost guardrails.** Athena workgroup enforced with a 1 GB per-query scan limit; query
   results expire after 7 days; a $1/month budget emails at 50% and 100%.
