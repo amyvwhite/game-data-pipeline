@@ -26,7 +26,7 @@ on:
 permissions:
   contents: write   # commit the updated data
   pages: write      # deploy the dashboard
-  id-token: write   # required by the Pages deploy action
+  id-token: write   # Pages deploy, and AWS sign-in through OIDC (no stored AWS keys)
 
 concurrency:
   group: live-pipeline   # never two runs writing the data at once
@@ -56,6 +56,10 @@ jobs:
       TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
       TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # AWS data lake (optional): set these repository variables from the CloudFormation
+      # stack outputs (docs/AWS_SETUP.md). Not secrets: an ARN and a bucket name are not credentials.
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-2' }}
     outputs:
       pipeline_exit: ${{ steps.run.outputs.exit_code }}
     steps:
@@ -99,9 +103,33 @@ jobs:
             git push
           fi
 
+      # ---- AWS data lake: once a day, yesterday's complete data as Parquet (ADR 0005) ----
+      # Runs after the data is committed, so an AWS problem can never cost collected data.
+      - name: Sign in to AWS (OIDC, short-lived credentials)
+        id: aws
+        if: vars.AWS_ROLE_ARN != '' && steps.run.outputs.exit_code == '0'
+        continue-on-error: true
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-2' }}
+          role-session-name: game-data-pipeline-${{ github.run_id }}
+
+      - name: Export missing days to the data lake and check them with Athena
+        id: lake
+        if: steps.aws.outcome == 'success'
+        continue-on-error: true
+        run: python -m pipeline.lake export   # usually "nothing to export"; ~7 small files once a day
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dashboard
+
+      - name: Fail the run if the data-lake export failed
+        if: steps.aws.outcome == 'failure' || steps.lake.outcome == 'failure'
+        run: |
+          echo "::error::AWS data-lake step failed (the data was still collected and committed). See the 'Sign in to AWS' and 'Export' steps."
+          exit 1
 
       - name: Fail the run if the pipeline failed
         if: steps.run.outputs.exit_code != '0'

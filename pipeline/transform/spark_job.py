@@ -499,16 +499,11 @@ def _utc_row(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def run_transform(
-    spark: SparkSession,
-    raw_root: Path,
-    snapshot_date: date,
-    clean_root: Path | None = None,
-) -> dict[str, list[dict[str, Any]]]:
-    """Build all clean tables for one day.
+def build_tables(spark: SparkSession, raw_root: Path, snapshot_date: date) -> dict[str, DataFrame]:
+    """All clean tables for one day, as (lazy) Spark DataFrames.
 
-    If clean_root is given, each table is also written as Parquet partitioned by
-    snapshot_date (a simple "clean zone" in the data lake).
+    Also used by infra/aws/build_template.py to read each table's schema, so the Athena
+    table definitions can't drift from what Spark actually writes.
     """
     players = read_source(spark, raw_root, "players", snapshot_date)
     appdetails = read_source(spark, raw_root, "appdetails", snapshot_date)
@@ -519,7 +514,7 @@ def run_transform(
     theme_version, themes = load_review_themes()
 
     snapshots = transform_player_snapshots(players).cache()
-    tables: dict[str, DataFrame] = {
+    return {
         "apps": transform_apps(appdetails),
         "player_count_snapshots": snapshots,
         "player_counts_daily": transform_player_daily(snapshots),
@@ -530,6 +525,21 @@ def run_transform(
         "steam_app_names": transform_steam_app_names(market),
         "review_themes": transform_review_themes(review_text, themes, theme_version),
     }
+
+
+def run_transform(
+    spark: SparkSession,
+    raw_root: Path,
+    snapshot_date: date,
+    clean_root: Path | None = None,
+) -> dict[str, list[dict[str, Any]]]:
+    """Build all clean tables for one day.
+
+    If clean_root is given, each table is also written as Parquet partitioned by
+    snapshot_date (the "clean zone" of the data lake, see pipeline/lake.py).
+    """
+    tables = build_tables(spark, raw_root, snapshot_date)
+    snapshots = tables["player_count_snapshots"]
 
     if clean_root is not None:
         for name, df in tables.items():

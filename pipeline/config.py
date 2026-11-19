@@ -35,6 +35,9 @@ class Settings:
     s3_bucket: str = ""
     s3_prefix: str = "game-data-pipeline"
     aws_region: str = "ca-central-1"
+    # Data lake (optional, see pipeline/lake.py): Glue database + Athena workgroup.
+    athena_database: str = "game_data"
+    athena_workgroup: str = "game-data"
 
     # Postgres connection string, e.g. postgresql+psycopg://user:pass@localhost:5432/games
     database_url: str = ""
@@ -93,6 +96,8 @@ def get_settings() -> Settings:
         s3_bucket=env("S3_BUCKET", ""),
         s3_prefix=env("S3_PREFIX", "game-data-pipeline"),
         aws_region=env("AWS_REGION", "ca-central-1"),
+        athena_database=env("ATHENA_DATABASE", "game_data"),
+        athena_workgroup=env("ATHENA_WORKGROUP", "game-data"),
         database_url=env("DATABASE_URL", ""),
         steam_country=env("STEAM_COUNTRY", "ca"),
         request_timeout_s=float(env("REQUEST_TIMEOUT_S", "10")),

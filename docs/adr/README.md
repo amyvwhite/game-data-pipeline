@@ -10,3 +10,4 @@ number; superseded ones are marked, not deleted.
 | [0002](0002-review-text-data-minimisation.md) | Store review theme counts, never review text | Accepted |
 | [0003](0003-forecast-models-and-scoring.md) | Three forecast models, champion picked by out-of-sample error | Accepted |
 | [0004](0004-market-data-retention.md) | Keep hourly market rows 30 days, daily rollup forever | Accepted |
+| [0005](0005-aws-data-lake.md) | AWS data lake: daily Parquet export to S3, queried with Athena | Accepted |

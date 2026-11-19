@@ -62,6 +62,10 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - run: pip install -r requirements-dev.txt
       - run: pytest -v --cov --cov-report=term   # fails if coverage drops below 85% (pyproject.toml)
+      - name: AWS template matches the Spark schemas (no drift)
+        run: python infra/aws/build_template.py --check
+      - name: Lint the CloudFormation template
+        run: cfn-lint infra/aws/stack.yml
 
   docker-build:
     runs-on: ubuntu-latest

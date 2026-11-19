@@ -1,6 +1,6 @@
 [project]
 name = "game-data-pipeline"
-version = "0.2.0"
+version = "0.3.0"
 description = "Hourly pipeline for public Steam and Twitch game data: extract, PySpark transform, quality checks, Postgres load, forecasts and a live dashboard."
 requires-python = ">=3.11"
 

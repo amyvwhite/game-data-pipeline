@@ -3,6 +3,22 @@
 All notable changes to this project. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning: [SemVer](https://semver.org/).
 
+## [0.3.0] - 2026-11-19
+
+### Added
+- **AWS data lake** (ADR 0005): daily D-1 export of the 7 fact tables from Postgres to
+  Parquet on S3 (`pipeline/lake.py`), verified end to end with an Athena query.
+- **Infrastructure as code**: `infra/aws/stack.yml` (CloudFormation) creates the encrypted
+  bucket, Glue catalog with partition projection, Athena workgroup with cost limits, a
+  GitHub OIDC role (no stored AWS keys, least privilege) and a $1/month budget alert.
+  Generated from the Spark schemas by `infra/aws/build_template.py`; CI fails on drift
+  and lints the template with cfn-lint.
+- `docs/AWS_SETUP.md`; moto-based tests for the export (no real AWS in tests).
+
+### Changed
+- `run_transform` split into `build_tables` + `run_transform` so schemas can be read
+  without running a job.
+
 ## [0.2.1] - 2026-11-19
 
 ### Changed
