@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:08:28+00:00",
+  "generated_at": "2026-11-27T08:20:03+00:00",
   "run_date": "2026-11-27",
   "is_sample": false,
   "groups": {
@@ -17,9 +17,9 @@
     "1091500": "Competitor"
   },
   "coverage": {
-    "snapshots": 377,
+    "snapshots": 388,
     "first_snapshot": "2026-11-18T18:14:57.195867+00:00",
-    "last_snapshot": "2026-11-27T00:04:45.582878+00:00",
+    "last_snapshot": "2026-11-27T08:17:11.606993+00:00",
     "days_collected": 10
   },
   "daily_players": [
@@ -90,8 +90,8 @@
       "app_id": 271590,
       "name": "Grand Theft Auto V Legacy",
       "snapshot_date": "2026-11-27",
-      "avg_players": 41394.0,
-      "max_players": 41394
+      "avg_players": 46309.0,
+      "max_players": 51224
     },
     {
       "app_id": 289070,
@@ -160,8 +160,8 @@
       "app_id": 289070,
       "name": "Sid Meier\u2019s Civilization\u00ae VI",
       "snapshot_date": "2026-11-27",
-      "avg_players": 17713.0,
-      "max_players": 17713
+      "avg_players": 19840.5,
+      "max_players": 21968
     },
     {
       "app_id": 1091500,
@@ -230,7 +230,7 @@
       "app_id": 1091500,
       "name": "Cyberpunk 2077",
       "snapshot_date": "2026-11-27",
-      "avg_players": 50010.0,
+      "avg_players": 47311.0,
       "max_players": 50010
     },
     {
@@ -300,7 +300,7 @@
       "app_id": 1174180,
       "name": "Red Dead Redemption 2",
       "snapshot_date": "2026-11-27",
-      "avg_players": 45080.0,
+      "avg_players": 44320.5,
       "max_players": 45080
     },
     {
@@ -370,7 +370,7 @@
       "app_id": 1285190,
       "name": "Borderlands 4",
       "snapshot_date": "2026-11-27",
-      "avg_players": 3066.0,
+      "avg_players": 2597.5,
       "max_players": 3066
     },
     {
@@ -440,7 +440,7 @@
       "app_id": 1295660,
       "name": "Sid Meier's Civilization VII",
       "snapshot_date": "2026-11-27",
-      "avg_players": 5870.0,
+      "avg_players": 5170.5,
       "max_players": 5870
     },
     {
@@ -510,7 +510,7 @@
       "app_id": 1938090,
       "name": "Call of Duty\u00ae",
       "snapshot_date": "2026-11-27",
-      "avg_players": 74109.0,
+      "avg_players": 66458.5,
       "max_players": 74109
     },
     {
@@ -580,8 +580,8 @@
       "app_id": 3159330,
       "name": "Assassin\u2019s Creed Shadows",
       "snapshot_date": "2026-11-27",
-      "avg_players": 1019.0,
-      "max_players": 1019
+      "avg_players": 1105.0,
+      "max_players": 1191
     },
     {
       "app_id": 3240220,
@@ -650,8 +650,8 @@
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
       "snapshot_date": "2026-11-27",
-      "avg_players": 49064.0,
-      "max_players": 49064
+      "avg_players": 60645.5,
+      "max_players": 72227
     },
     {
       "app_id": 3405690,
@@ -720,7 +720,7 @@
       "app_id": 3405690,
       "name": "EA SPORTS FC\u2122 26",
       "snapshot_date": "2026-11-27",
-      "avg_players": 14883.0,
+      "avg_players": 12187.0,
       "max_players": 14883
     },
     {
@@ -790,8 +790,8 @@
       "app_id": 3472040,
       "name": "NBA 2K26",
       "snapshot_date": "2026-11-27",
-      "avg_players": 3007.0,
-      "max_players": 3007
+      "avg_players": 4732.5,
+      "max_players": 6458
     }
   ],
   "latest_prices": [
@@ -1022,15 +1022,15 @@
     {
       "snapshot_date": "2026-11-27",
       "publisher_group": "Take-Two",
-      "avg_players": 165194.0,
-      "share_pct": 54.1,
+      "avg_players": 183616.0,
+      "share_pct": 59.1,
       "rank_that_day": 1
     },
     {
       "snapshot_date": "2026-11-27",
       "publisher_group": "Competitor",
-      "avg_players": 140021.0,
-      "share_pct": 45.9,
+      "avg_players": 127062.0,
+      "share_pct": 40.9,
       "rank_that_day": 2
     },
     {
@@ -1170,8 +1170,8 @@
     {
       "app_id": 271590,
       "local_hour": 3,
-      "avg_players": 61358.0,
-      "samples": 2
+      "avg_players": 57980.0,
+      "samples": 3
     },
     {
       "app_id": 271590,
@@ -1284,8 +1284,8 @@
     {
       "app_id": 289070,
       "local_hour": 3,
-      "avg_players": 31182.0,
-      "samples": 2
+      "avg_players": 28111.0,
+      "samples": 3
     },
     {
       "app_id": 289070,
@@ -1398,8 +1398,8 @@
     {
       "app_id": 1091500,
       "local_hour": 3,
-      "avg_players": 68311.0,
-      "samples": 2
+      "avg_players": 60411.0,
+      "samples": 3
     },
     {
       "app_id": 1091500,
@@ -1512,8 +1512,8 @@
     {
       "app_id": 1174180,
       "local_hour": 3,
-      "avg_players": 42138.0,
-      "samples": 2
+      "avg_players": 42612.0,
+      "samples": 3
     },
     {
       "app_id": 1174180,
@@ -1626,8 +1626,8 @@
     {
       "app_id": 1285190,
       "local_hour": 3,
-      "avg_players": 3223.0,
-      "samples": 2
+      "avg_players": 2858.0,
+      "samples": 3
     },
     {
       "app_id": 1285190,
@@ -1740,8 +1740,8 @@
     {
       "app_id": 1295660,
       "local_hour": 3,
-      "avg_players": 6171.0,
-      "samples": 2
+      "avg_players": 5604.0,
+      "samples": 3
     },
     {
       "app_id": 1295660,
@@ -1854,8 +1854,8 @@
     {
       "app_id": 1938090,
       "local_hour": 3,
-      "avg_players": 84894.0,
-      "samples": 2
+      "avg_players": 76199.0,
+      "samples": 3
     },
     {
       "app_id": 1938090,
@@ -1968,8 +1968,8 @@
     {
       "app_id": 3159330,
       "local_hour": 3,
-      "avg_players": 2165.0,
-      "samples": 2
+      "avg_players": 1840.0,
+      "samples": 3
     },
     {
       "app_id": 3159330,
@@ -2082,8 +2082,8 @@
     {
       "app_id": 3240220,
       "local_hour": 3,
-      "avg_players": 88219.0,
-      "samples": 2
+      "avg_players": 82888.0,
+      "samples": 3
     },
     {
       "app_id": 3240220,
@@ -2196,8 +2196,8 @@
     {
       "app_id": 3405690,
       "local_hour": 3,
-      "avg_players": 15144.0,
-      "samples": 2
+      "avg_players": 13259.0,
+      "samples": 3
     },
     {
       "app_id": 3405690,
@@ -2310,8 +2310,8 @@
     {
       "app_id": 3472040,
       "local_hour": 3,
-      "avg_players": 9988.0,
-      "samples": 2
+      "avg_players": 8811.0,
+      "samples": 3
     },
     {
       "app_id": 3472040,
@@ -2424,7 +2424,7 @@
       "peak_avg_players": 118499.0,
       "quiet_hour_toronto": 19,
       "quiet_avg_players": 46275.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 1938090,
@@ -2433,7 +2433,7 @@
       "peak_avg_players": 113743.0,
       "quiet_hour_toronto": 5,
       "quiet_avg_players": 59288.0,
-      "snapshots_used": 33.0
+      "snapshots_used": 34.0
     },
     {
       "app_id": 1091500,
@@ -2442,7 +2442,7 @@
       "peak_avg_players": 96223.0,
       "quiet_hour_toronto": 5,
       "quiet_avg_players": 45509.0,
-      "snapshots_used": 33.0
+      "snapshots_used": 34.0
     },
     {
       "app_id": 271590,
@@ -2451,7 +2451,7 @@
       "peak_avg_players": 94353.0,
       "quiet_hour_toronto": 22,
       "quiet_avg_players": 33426.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 1174180,
@@ -2460,7 +2460,7 @@
       "peak_avg_players": 70911.0,
       "quiet_hour_toronto": 13,
       "quiet_avg_players": 26307.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 289070,
@@ -2469,7 +2469,7 @@
       "peak_avg_players": 38336.0,
       "quiet_hour_toronto": 19,
       "quiet_avg_players": 18092.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 3405690,
@@ -2478,7 +2478,7 @@
       "peak_avg_players": 27067.0,
       "quiet_hour_toronto": 0,
       "quiet_avg_players": 10117.0,
-      "snapshots_used": 33.0
+      "snapshots_used": 34.0
     },
     {
       "app_id": 3472040,
@@ -2487,7 +2487,7 @@
       "peak_avg_players": 13238.0,
       "quiet_hour_toronto": 18,
       "quiet_avg_players": 2983.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 1295660,
@@ -2496,7 +2496,7 @@
       "peak_avg_players": 10232.0,
       "quiet_hour_toronto": 5,
       "quiet_avg_players": 4579.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 1285190,
@@ -2505,7 +2505,7 @@
       "peak_avg_players": 5296.0,
       "quiet_hour_toronto": 5,
       "quiet_avg_players": 2105.0,
-      "snapshots_used": 35.0
+      "snapshots_used": 36.0
     },
     {
       "app_id": 3159330,
@@ -2514,7 +2514,7 @@
       "peak_avg_players": 2888.0,
       "quiet_hour_toronto": 0,
       "quiet_avg_players": 1093.0,
-      "snapshots_used": 33.0
+      "snapshots_used": 34.0
     }
   ],
   "sale_impact": [
@@ -2524,9 +2524,9 @@
       "sale_days": 4,
       "full_price_days": 6,
       "max_discount": 75,
-      "avg_players_on_sale": 49061.0,
+      "avg_players_on_sale": 48871.0,
       "avg_players_full_price": 35997.0,
-      "sale_uplift_pct": 36.3
+      "sale_uplift_pct": 35.8
     },
     {
       "app_id": 289070,
@@ -2534,19 +2534,9 @@
       "sale_days": 8,
       "full_price_days": 2,
       "max_discount": 90,
-      "avg_players_on_sale": 24564.0,
+      "avg_players_on_sale": 24830.0,
       "avg_players_full_price": 23344.0,
-      "sale_uplift_pct": 5.2
-    },
-    {
-      "app_id": 1285190,
-      "name": "Borderlands 4",
-      "sale_days": 8,
-      "full_price_days": 2,
-      "max_discount": 50,
-      "avg_players_on_sale": 3420.0,
-      "avg_players_full_price": 3395.0,
-      "sale_uplift_pct": 0.7
+      "sale_uplift_pct": 6.4
     },
     {
       "app_id": 3240220,
@@ -2554,8 +2544,18 @@
       "sale_days": 4,
       "full_price_days": 6,
       "max_discount": 56,
-      "avg_players_on_sale": 70356.0,
+      "avg_players_on_sale": 73251.0,
       "avg_players_full_price": 71071.0,
+      "sale_uplift_pct": 3.1
+    },
+    {
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "sale_days": 8,
+      "full_price_days": 2,
+      "max_discount": 50,
+      "avg_players_on_sale": 3362.0,
+      "avg_players_full_price": 3395.0,
       "sale_uplift_pct": -1.0
     },
     {
@@ -2564,9 +2564,9 @@
       "sale_days": 4,
       "full_price_days": 6,
       "max_discount": 50,
-      "avg_players_on_sale": 6146.0,
+      "avg_players_on_sale": 5971.0,
       "avg_players_full_price": 7029.0,
-      "sale_uplift_pct": -12.6
+      "sale_uplift_pct": -15.0
     }
   ],
   "anomalies": [
@@ -2673,7 +2673,7 @@
     {
       "app_id": -6,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 418609.0,
+      "avg_viewers": 270667.0,
       "max_viewers": 418609
     },
     {
@@ -2727,7 +2727,7 @@
     {
       "app_id": 289070,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 35.0,
+      "avg_viewers": 22.0,
       "max_viewers": 35
     },
     {
@@ -2781,7 +2781,7 @@
     {
       "app_id": 1091500,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 1342.0,
+      "avg_viewers": 1169.0,
       "max_viewers": 1342
     },
     {
@@ -2835,8 +2835,8 @@
     {
       "app_id": 1285190,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 57.0,
-      "max_viewers": 57
+      "avg_viewers": 83.0,
+      "max_viewers": 109
     },
     {
       "app_id": 1295660,
@@ -2889,8 +2889,8 @@
     {
       "app_id": 1295660,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 4.0,
-      "max_viewers": 4
+      "avg_viewers": 6.0,
+      "max_viewers": 8
     },
     {
       "app_id": 1938090,
@@ -2943,7 +2943,7 @@
     {
       "app_id": 1938090,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 261.0,
+      "avg_viewers": 246.0,
       "max_viewers": 261
     },
     {
@@ -2997,7 +2997,7 @@
     {
       "app_id": 3159330,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 34.0,
+      "avg_viewers": 29.0,
       "max_viewers": 34
     },
     {
@@ -3051,7 +3051,7 @@
     {
       "app_id": 3240220,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 32099.0,
+      "avg_viewers": 19767.0,
       "max_viewers": 32099
     },
     {
@@ -3105,7 +3105,7 @@
     {
       "app_id": 3405690,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 916.0,
+      "avg_viewers": 844.0,
       "max_viewers": 916
     },
     {
@@ -3159,7 +3159,7 @@
     {
       "app_id": 3472040,
       "snapshot_date": "2026-11-27",
-      "avg_viewers": 121.0,
+      "avg_viewers": 103.0,
       "max_viewers": 121
     }
   ],
@@ -3167,86 +3167,91 @@
     {
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
-      "readings": 26,
-      "avg_viewers": 30511.0,
-      "avg_players": 75216.0,
-      "viewers_per_player": 0.406,
-      "correlation": 0.47
+      "readings": 27,
+      "avg_viewers": 29657.0,
+      "avg_players": 75105.0,
+      "viewers_per_player": 0.395,
+      "correlation": 0.45
     },
     {
       "app_id": 1091500,
       "name": "Cyberpunk 2077",
-      "readings": 26,
-      "avg_viewers": 1641.0,
-      "avg_players": 66806.0,
+      "readings": 27,
+      "avg_viewers": 1617.0,
+      "avg_players": 65984.0,
       "viewers_per_player": 0.025,
-      "correlation": 0.35
+      "correlation": 0.38
     },
     {
       "app_id": 3405690,
       "name": "EA Sports FC 26",
-      "readings": 26,
-      "avg_viewers": 645.0,
-      "avg_players": 17205.0,
-      "viewers_per_player": 0.037,
-      "correlation": -0.32
+      "readings": 27,
+      "avg_viewers": 650.0,
+      "avg_players": 16920.0,
+      "viewers_per_player": 0.038,
+      "correlation": -0.36
     },
     {
       "app_id": 289070,
       "name": "Sid Meier's Civilization VI",
-      "readings": 26,
-      "avg_viewers": 215.0,
-      "avg_players": 25923.0,
+      "readings": 27,
+      "avg_viewers": 207.0,
+      "avg_players": 25777.0,
       "viewers_per_player": 0.008,
-      "correlation": 0.44
+      "correlation": 0.46
     },
     {
       "app_id": 1938090,
       "name": "Call of Duty",
-      "readings": 26,
-      "avg_viewers": 201.0,
-      "avg_players": 89024.0,
+      "readings": 27,
+      "avg_viewers": 202.0,
+      "avg_players": 87905.0,
       "viewers_per_player": 0.002,
-      "correlation": 0.02
+      "correlation": 0.0
     },
     {
       "app_id": 3472040,
       "name": "NBA 2K26",
-      "readings": 26,
-      "avg_viewers": 114.0,
-      "avg_players": 7173.0,
+      "readings": 27,
+      "avg_viewers": 113.0,
+      "avg_players": 7146.0,
       "viewers_per_player": 0.016,
-      "correlation": -0.44
+      "correlation": -0.43
     },
     {
       "app_id": 1285190,
       "name": "Borderlands 4",
-      "readings": 26,
-      "avg_viewers": 47.0,
-      "avg_players": 3481.0,
+      "readings": 27,
+      "avg_viewers": 50.0,
+      "avg_players": 3431.0,
       "viewers_per_player": 0.014,
-      "correlation": 0.39
+      "correlation": 0.22
     },
     {
       "app_id": 3159330,
       "name": "Assassin's Creed Shadows",
-      "readings": 26,
-      "avg_viewers": 39.0,
-      "avg_players": 1769.0,
+      "readings": 27,
+      "avg_viewers": 38.0,
+      "avg_players": 1747.0,
       "viewers_per_player": 0.022,
-      "correlation": -0.25
+      "correlation": -0.23
     },
     {
       "app_id": 1295660,
       "name": "Sid Meier's Civilization VII",
-      "readings": 26,
+      "readings": 27,
       "avg_viewers": 8.0,
-      "avg_players": 6831.0,
+      "avg_players": 6744.0,
       "viewers_per_player": 0.001,
-      "correlation": 0.39
+      "correlation": 0.37
     }
   ],
   "recent_runs": [
+    {
+      "finished_at": "2026-11-27T08:20:03.184354+00:00",
+      "status": "success",
+      "rows_loaded": 133
+    },
     {
       "finished_at": "2026-11-27T00:08:28.771100+00:00",
       "status": "success",
@@ -3429,70 +3434,70 @@
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
       "after_launch": true,
-      "avg_players": 49064.0,
+      "avg_players": 60646.0,
       "pre_launch_avg": 62179.0,
-      "change_vs_pre_launch_pct": -21.1,
-      "gta6_twitch_viewers": 418609.0
-    },
-    {
-      "snapshot_date": "2026-11-27",
-      "app_id": 1174180,
-      "name": "Red Dead Redemption 2",
-      "after_launch": true,
-      "avg_players": 45080.0,
-      "pre_launch_avg": 25513.0,
-      "change_vs_pre_launch_pct": 76.7,
-      "gta6_twitch_viewers": 418609.0
+      "change_vs_pre_launch_pct": -2.5,
+      "gta6_twitch_viewers": 270667.0
     },
     {
       "snapshot_date": "2026-11-27",
       "app_id": 271590,
       "name": "Grand Theft Auto V Legacy",
       "after_launch": true,
-      "avg_players": 41394.0,
+      "avg_players": 46309.0,
       "pre_launch_avg": 63598.0,
-      "change_vs_pre_launch_pct": -34.9,
-      "gta6_twitch_viewers": 418609.0
+      "change_vs_pre_launch_pct": -27.2,
+      "gta6_twitch_viewers": 270667.0
+    },
+    {
+      "snapshot_date": "2026-11-27",
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "after_launch": true,
+      "avg_players": 44321.0,
+      "pre_launch_avg": 25513.0,
+      "change_vs_pre_launch_pct": 73.7,
+      "gta6_twitch_viewers": 270667.0
     },
     {
       "snapshot_date": "2026-11-27",
       "app_id": 289070,
       "name": "Sid Meier's Civilization VI",
       "after_launch": true,
-      "avg_players": 17713.0,
+      "avg_players": 19841.0,
       "pre_launch_avg": 22492.0,
-      "change_vs_pre_launch_pct": -21.2,
-      "gta6_twitch_viewers": 418609.0
+      "change_vs_pre_launch_pct": -11.8,
+      "gta6_twitch_viewers": 270667.0
     },
     {
       "snapshot_date": "2026-11-27",
       "app_id": 1295660,
       "name": "Sid Meier's Civilization VII",
       "after_launch": true,
-      "avg_players": 5870.0,
+      "avg_players": 5171.0,
       "pre_launch_avg": 7459.0,
-      "change_vs_pre_launch_pct": -21.3,
-      "gta6_twitch_viewers": 418609.0
-    },
-    {
-      "snapshot_date": "2026-11-27",
-      "app_id": 1285190,
-      "name": "Borderlands 4",
-      "after_launch": true,
-      "avg_players": 3066.0,
-      "pre_launch_avg": 3753.0,
-      "change_vs_pre_launch_pct": -18.3,
-      "gta6_twitch_viewers": 418609.0
+      "change_vs_pre_launch_pct": -30.7,
+      "gta6_twitch_viewers": 270667.0
     },
     {
       "snapshot_date": "2026-11-27",
       "app_id": 3472040,
       "name": "NBA 2K26",
       "after_launch": true,
-      "avg_players": 3007.0,
+      "avg_players": 4733.0,
       "pre_launch_avg": 4175.0,
-      "change_vs_pre_launch_pct": -28.0,
-      "gta6_twitch_viewers": 418609.0
+      "change_vs_pre_launch_pct": 13.3,
+      "gta6_twitch_viewers": 270667.0
+    },
+    {
+      "snapshot_date": "2026-11-27",
+      "app_id": 1285190,
+      "name": "Borderlands 4",
+      "after_launch": true,
+      "avg_players": 2598.0,
+      "pre_launch_avg": 3753.0,
+      "change_vs_pre_launch_pct": -30.8,
+      "gta6_twitch_viewers": 270667.0
     },
     {
       "snapshot_date": "2026-11-26",
@@ -4128,13 +4133,6 @@
   "forecast_series": [
     {
       "app_id": 271590,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 33846.0,
-      "forecast": null,
-      "model": null
-    },
-    {
-      "app_id": 271590,
       "hour": "2026-11-25T10:00:00+00:00",
       "actual": null,
       "forecast": 57089.0,
@@ -4212,6 +4210,13 @@
     },
     {
       "app_id": 271590,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 51224.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 271590,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 84868.0,
@@ -4225,11 +4230,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 289070,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 20427.0,
-      "forecast": null,
-      "model": null
+      "app_id": 271590,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 51224.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 289070,
@@ -4310,6 +4315,13 @@
     },
     {
       "app_id": 289070,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 21968.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 289070,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 31430.0,
@@ -4323,11 +4335,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 1091500,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 53305.0,
-      "forecast": null,
-      "model": null
+      "app_id": 289070,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 21968.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 1091500,
@@ -4408,6 +4420,13 @@
     },
     {
       "app_id": 1091500,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 44612.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 1091500,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 65688.0,
@@ -4421,11 +4440,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 1174180,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 41385.0,
-      "forecast": null,
-      "model": null
+      "app_id": 1091500,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 44612.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 1174180,
@@ -4506,6 +4525,13 @@
     },
     {
       "app_id": 1174180,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 43561.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 1174180,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 70911.0,
@@ -4519,11 +4545,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 1285190,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 3133.0,
-      "forecast": null,
-      "model": null
+      "app_id": 1174180,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 43561.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 1285190,
@@ -4604,6 +4630,13 @@
     },
     {
       "app_id": 1285190,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 2129.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 1285190,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 3554.0,
@@ -4617,11 +4650,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 1295660,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 5798.0,
-      "forecast": null,
-      "model": null
+      "app_id": 1285190,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 2129.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 1295660,
@@ -4702,6 +4735,13 @@
     },
     {
       "app_id": 1295660,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 4471.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 1295660,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 7403.0,
@@ -4715,11 +4755,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 1938090,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 81320.0,
-      "forecast": null,
-      "model": null
+      "app_id": 1295660,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 4471.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 1938090,
@@ -4800,6 +4840,13 @@
     },
     {
       "app_id": 1938090,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 58808.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 1938090,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 91706.0,
@@ -4813,11 +4860,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 3159330,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 1083.0,
-      "forecast": null,
-      "model": null
+      "app_id": 1938090,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 58808.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 3159330,
@@ -4898,6 +4945,13 @@
     },
     {
       "app_id": 3159330,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 1191.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 3159330,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 2117.0,
@@ -4911,11 +4965,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 3240220,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 56958.0,
-      "forecast": null,
-      "model": null
+      "app_id": 3159330,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 1191.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 3240220,
@@ -4996,6 +5050,13 @@
     },
     {
       "app_id": 3240220,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 72227.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 3240220,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 112021.0,
@@ -5009,11 +5070,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 3405690,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 11240.0,
-      "forecast": null,
-      "model": null
+      "app_id": 3240220,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 72227.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 3405690,
@@ -5094,6 +5155,13 @@
     },
     {
       "app_id": 3405690,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 9491.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 3405690,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 21124.0,
@@ -5107,11 +5175,11 @@
       "model": "naive_24h"
     },
     {
-      "app_id": 3472040,
-      "hour": "2026-11-25T03:00:00+00:00",
-      "actual": 5024.0,
-      "forecast": null,
-      "model": null
+      "app_id": 3405690,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 9491.0,
+      "model": "naive_24h"
     },
     {
       "app_id": 3472040,
@@ -5192,6 +5260,13 @@
     },
     {
       "app_id": 3472040,
+      "hour": "2026-11-27T08:00:00+00:00",
+      "actual": 6458.0,
+      "forecast": null,
+      "model": null
+    },
+    {
+      "app_id": 3472040,
       "hour": "2026-11-27T15:00:00+00:00",
       "actual": null,
       "forecast": 10798.0,
@@ -5202,6 +5277,13 @@
       "hour": "2026-11-28T00:00:00+00:00",
       "actual": null,
       "forecast": 3007.0,
+      "model": "naive_24h"
+    },
+    {
+      "app_id": 3472040,
+      "hour": "2026-11-28T08:00:00+00:00",
+      "actual": null,
+      "forecast": 6458.0,
       "model": "naive_24h"
     }
   ],
@@ -5336,10 +5418,10 @@
       "sale_end": "2026-11-27",
       "discount_pct": 75,
       "pre_avg_players": 35997.0,
-      "sale_avg_players": 49061.0,
-      "raw_change_pct": 36.3,
-      "control_change_pct": -16.9,
-      "lift_pct_points": 53.2
+      "sale_avg_players": 48871.0,
+      "raw_change_pct": 35.8,
+      "control_change_pct": -16.4,
+      "lift_pct_points": 52.2
     },
     {
       "app_id": 3240220,
@@ -5348,10 +5430,10 @@
       "sale_end": "2026-11-27",
       "discount_pct": 56,
       "pre_avg_players": 71071.0,
-      "sale_avg_players": 70356.0,
-      "raw_change_pct": -1.0,
-      "control_change_pct": -16.9,
-      "lift_pct_points": 15.9
+      "sale_avg_players": 73251.0,
+      "raw_change_pct": 3.1,
+      "control_change_pct": -16.4,
+      "lift_pct_points": 19.5
     },
     {
       "app_id": 1295660,
@@ -5360,10 +5442,10 @@
       "sale_end": "2026-11-27",
       "discount_pct": 50,
       "pre_avg_players": 7029.0,
-      "sale_avg_players": 6146.0,
-      "raw_change_pct": -12.6,
-      "control_change_pct": -16.9,
-      "lift_pct_points": 4.4
+      "sale_avg_players": 5971.0,
+      "raw_change_pct": -15.0,
+      "control_change_pct": -16.4,
+      "lift_pct_points": 1.4
     }
   ],
   "top100": [
@@ -5372,55 +5454,55 @@
       "app_id": 730,
       "name": "Counter-Strike 2",
       "publisher_group": "Other",
-      "current_players": 515114,
-      "daily_peak": 1207614,
+      "current_players": 549743,
+      "daily_peak": 1140407,
       "last_week_rank": 1,
-      "share_of_top100_pct": 13.99,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 14.03,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 2,
       "app_id": 578080,
       "name": "PUBG: BATTLEGROUNDS",
       "publisher_group": "Other",
-      "current_players": 79064,
-      "daily_peak": 752777,
+      "current_players": 313324,
+      "daily_peak": 741985,
       "last_week_rank": 3,
-      "share_of_top100_pct": 2.15,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 8.0,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 3,
       "app_id": 570,
       "name": "Dota 2",
       "publisher_group": "Other",
-      "current_players": 479582,
-      "daily_peak": 756213,
+      "current_players": 465273,
+      "daily_peak": 768271,
       "last_week_rank": 2,
-      "share_of_top100_pct": 13.03,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 11.88,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 4,
       "app_id": 431960,
       "name": "Wallpaper Engine",
       "publisher_group": "Other",
-      "current_players": 45807,
-      "daily_peak": 109719,
+      "current_players": 77144,
+      "daily_peak": 108937,
       "last_week_rank": 5,
-      "share_of_top100_pct": 1.24,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 1.97,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 5,
       "app_id": 4262460,
       "name": "ROB RUN",
       "publisher_group": "Other",
-      "current_players": 276538,
-      "daily_peak": 414459,
+      "current_players": 148758,
+      "daily_peak": 388351,
       "last_week_rank": 4,
-      "share_of_top100_pct": 7.51,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 3.8,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 6,
@@ -5428,1044 +5510,1044 @@
       "name": "Deadlock",
       "publisher_group": "Other",
       "current_players": null,
-      "daily_peak": 186875,
+      "daily_peak": 190514,
       "last_week_rank": 6,
       "share_of_top100_pct": null,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 7,
       "app_id": 1172470,
       "name": "Apex Legends\u2122",
       "publisher_group": "Other",
-      "current_players": 42509,
-      "daily_peak": 237971,
+      "current_players": 91045,
+      "daily_peak": 236719,
       "last_week_rank": 8,
-      "share_of_top100_pct": 1.15,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 2.32,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 8,
       "app_id": 2868840,
       "name": "Slay the Spire 2",
       "publisher_group": "Other",
-      "current_players": 52046,
-      "daily_peak": 131046,
+      "current_players": 70851,
+      "daily_peak": 127698,
       "last_week_rank": 7,
-      "share_of_top100_pct": 1.41,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 1.81,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 9,
       "app_id": 3240220,
       "name": "Grand Theft Auto V Enhanced",
       "publisher_group": "Take-Two",
-      "current_players": 49064,
-      "daily_peak": 124385,
+      "current_players": 72227,
+      "daily_peak": 126179,
       "last_week_rank": 12,
-      "share_of_top100_pct": 1.33,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 1.84,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 10,
       "app_id": 1938090,
       "name": "Call of Duty",
       "publisher_group": "Competitor",
-      "current_players": 74109,
-      "daily_peak": 88578,
+      "current_players": 58808,
+      "daily_peak": 94158,
       "last_week_rank": 10,
-      "share_of_top100_pct": 2.01,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 1.5,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 11,
-      "app_id": 4115450,
-      "name": "Phantom Blade Zero",
+      "app_id": 1973530,
+      "name": "Limbus Company",
       "publisher_group": "Other",
-      "current_players": 17590,
-      "daily_peak": 157941,
-      "last_week_rank": 9,
-      "share_of_top100_pct": 0.48,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 53700,
+      "daily_peak": 100578,
+      "last_week_rank": 11,
+      "share_of_top100_pct": 1.37,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 12,
-      "app_id": 381210,
-      "name": "Dead by Daylight",
+      "app_id": 4115450,
+      "name": "Phantom Blade Zero",
       "publisher_group": "Other",
-      "current_players": 40063,
-      "daily_peak": 62949,
-      "last_week_rank": 21,
-      "share_of_top100_pct": 1.09,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 56744,
+      "daily_peak": 146104,
+      "last_week_rank": 9,
+      "share_of_top100_pct": 1.45,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 13,
       "app_id": 236390,
       "name": "War Thunder",
       "publisher_group": "Other",
-      "current_players": 29199,
-      "daily_peak": 67242,
-      "last_week_rank": 13,
-      "share_of_top100_pct": 0.79,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 36680,
+      "daily_peak": 70741,
+      "last_week_rank": 14,
+      "share_of_top100_pct": 0.94,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 14,
       "app_id": 322170,
       "name": "Geometry Dash",
       "publisher_group": "Other",
-      "current_players": 41510,
-      "daily_peak": 62157,
-      "last_week_rank": 17,
-      "share_of_top100_pct": 1.13,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 25542,
+      "daily_peak": 62312,
+      "last_week_rank": 15,
+      "share_of_top100_pct": 0.65,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 15,
-      "app_id": 1091500,
-      "name": "Cyberpunk 2077",
-      "publisher_group": "Competitor",
-      "current_players": 50010,
-      "daily_peak": 68448,
-      "last_week_rank": 11,
-      "share_of_top100_pct": 1.36,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "app_id": 381210,
+      "name": "Dead by Daylight",
+      "publisher_group": "Other",
+      "current_players": 30930,
+      "daily_peak": 58337,
+      "last_week_rank": 23,
+      "share_of_top100_pct": 0.79,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 16,
-      "app_id": 1973530,
-      "name": "Limbus Company",
-      "publisher_group": "Other",
-      "current_players": 33075,
-      "daily_peak": 54644,
-      "last_week_rank": 15,
-      "share_of_top100_pct": 0.9,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "app_id": 1091500,
+      "name": "Cyberpunk 2077",
+      "publisher_group": "Competitor",
+      "current_players": 44612,
+      "daily_peak": 67710,
+      "last_week_rank": 13,
+      "share_of_top100_pct": 1.14,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 17,
-      "app_id": 1174180,
-      "name": "Red Dead Redemption 2",
-      "publisher_group": "Take-Two",
-      "current_players": 45080,
-      "daily_peak": 68593,
-      "last_week_rank": 40,
-      "share_of_top100_pct": 1.22,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 18,
-      "app_id": 359550,
-      "name": "Tom Clancy's Rainbow Six Siege",
-      "publisher_group": "Other",
-      "current_players": 45719,
-      "daily_peak": 62965,
-      "last_week_rank": 16,
-      "share_of_top100_pct": 1.24,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 19,
       "app_id": 2767030,
       "name": "Marvel Rivals",
       "publisher_group": "Other",
-      "current_players": 54649,
-      "daily_peak": 55773,
-      "last_week_rank": 22,
-      "share_of_top100_pct": 1.48,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 35437,
+      "daily_peak": 59325,
+      "last_week_rank": 17,
+      "share_of_top100_pct": 0.9,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 18,
+      "app_id": 1174180,
+      "name": "Red Dead Redemption 2",
+      "publisher_group": "Take-Two",
+      "current_players": 43561,
+      "daily_peak": 73693,
+      "last_week_rank": 36,
+      "share_of_top100_pct": 1.11,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 19,
+      "app_id": 359550,
+      "name": "Tom Clancy's Rainbow Six Siege",
+      "publisher_group": "Other",
+      "current_players": 30982,
+      "daily_peak": 59505,
+      "last_week_rank": 16,
+      "share_of_top100_pct": 0.79,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 20,
       "app_id": 271590,
       "name": "Grand Theft Auto V Legacy",
       "publisher_group": "Take-Two",
-      "current_players": 41394,
-      "daily_peak": 86990,
-      "last_week_rank": 26,
-      "share_of_top100_pct": 1.12,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 51224,
+      "daily_peak": 85896,
+      "last_week_rank": 21,
+      "share_of_top100_pct": 1.31,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 21,
       "app_id": 250900,
       "name": "The Binding of Isaac: Rebirth",
       "publisher_group": "Other",
-      "current_players": 24417,
-      "daily_peak": 40716,
-      "last_week_rank": 25,
-      "share_of_top100_pct": 0.66,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 22440,
+      "daily_peak": 40601,
+      "last_week_rank": 19,
+      "share_of_top100_pct": 0.57,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 22,
       "app_id": 2357570,
       "name": "Overwatch\u00ae",
       "publisher_group": "Other",
-      "current_players": 34861,
-      "daily_peak": 42317,
-      "last_week_rank": 23,
-      "share_of_top100_pct": 0.95,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 24294,
+      "daily_peak": 42231,
+      "last_week_rank": 24,
+      "share_of_top100_pct": 0.62,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 23,
       "app_id": 230410,
       "name": "Warframe",
       "publisher_group": "Other",
-      "current_players": 34944,
-      "daily_peak": 59825,
-      "last_week_rank": 19,
-      "share_of_top100_pct": 0.95,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 38896,
+      "daily_peak": 60147,
+      "last_week_rank": 22,
+      "share_of_top100_pct": 0.99,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 24,
-      "app_id": 3393110,
-      "name": "AION 2",
+      "app_id": 440,
+      "name": "Team Fortress 2",
       "publisher_group": "Other",
-      "current_players": 95287,
-      "daily_peak": 136772,
-      "last_week_rank": 20,
-      "share_of_top100_pct": 2.59,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 94858,
+      "daily_peak": 116398,
+      "last_week_rank": 26,
+      "share_of_top100_pct": 2.42,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 25,
       "app_id": 413150,
       "name": "Stardew Valley",
       "publisher_group": "Other",
-      "current_players": 29165,
-      "daily_peak": 71175,
-      "last_week_rank": 28,
-      "share_of_top100_pct": 0.79,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 37906,
+      "daily_peak": 69857,
+      "last_week_rank": 25,
+      "share_of_top100_pct": 0.97,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 26,
-      "app_id": 440,
-      "name": "Team Fortress 2",
+      "app_id": 3393110,
+      "name": "AION 2",
       "publisher_group": "Other",
-      "current_players": 98688,
-      "daily_peak": 103558,
-      "last_week_rank": 14,
-      "share_of_top100_pct": 2.68,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 82911,
+      "daily_peak": 129424,
+      "last_week_rank": 20,
+      "share_of_top100_pct": 2.12,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 27,
       "app_id": 227300,
       "name": "Euro Truck Simulator 2",
       "publisher_group": "Other",
-      "current_players": 19409,
-      "daily_peak": 51007,
+      "current_players": 18036,
+      "daily_peak": 48345,
       "last_week_rank": 18,
-      "share_of_top100_pct": 0.53,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.46,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 28,
       "app_id": 105600,
       "name": "Terraria",
       "publisher_group": "Other",
-      "current_players": 17333,
-      "daily_peak": 33134,
-      "last_week_rank": 34,
-      "share_of_top100_pct": 0.47,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 19341,
+      "daily_peak": 35471,
+      "last_week_rank": 32,
+      "share_of_top100_pct": 0.49,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 29,
       "app_id": 252490,
       "name": "Rust",
       "publisher_group": "Other",
-      "current_players": 58549,
-      "daily_peak": 84768,
-      "last_week_rank": 30,
-      "share_of_top100_pct": 1.59,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 54280,
+      "daily_peak": 94032,
+      "last_week_rank": 29,
+      "share_of_top100_pct": 1.39,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 30,
       "app_id": 438100,
       "name": "VRChat",
       "publisher_group": "Other",
-      "current_players": 35522,
-      "daily_peak": 53830,
-      "last_week_rank": 35,
-      "share_of_top100_pct": 0.96,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 42656,
+      "daily_peak": 55501,
+      "last_week_rank": 33,
+      "share_of_top100_pct": 1.09,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 31,
-      "app_id": 1867240,
-      "name": "WARDOGS",
+      "app_id": 553850,
+      "name": "HELLDIVERS\u2122 2",
       "publisher_group": "Other",
-      "current_players": 37534,
-      "daily_peak": 61758,
-      "last_week_rank": 24,
-      "share_of_top100_pct": 1.02,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 14246,
+      "daily_peak": 27602,
+      "last_week_rank": 34,
+      "share_of_top100_pct": 0.36,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 32,
       "app_id": 2507950,
       "name": "Delta Force",
       "publisher_group": "Other",
-      "current_players": 20413,
-      "daily_peak": 91500,
-      "last_week_rank": 29,
-      "share_of_top100_pct": 0.55,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 46263,
+      "daily_peak": 91223,
+      "last_week_rank": 30,
+      "share_of_top100_pct": 1.18,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 33,
       "app_id": 2807960,
       "name": "Battlefield\u2122 6",
       "publisher_group": "Other",
-      "current_players": 17340,
-      "daily_peak": 29109,
-      "last_week_rank": 33,
-      "share_of_top100_pct": 0.47,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 14185,
+      "daily_peak": 29087,
+      "last_week_rank": 37,
+      "share_of_top100_pct": 0.36,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 34,
-      "app_id": 553850,
-      "name": "HELLDIVERS\u2122 2",
+      "app_id": 1867240,
+      "name": "WARDOGS",
       "publisher_group": "Other",
-      "current_players": 15524,
-      "daily_peak": 27259,
-      "last_week_rank": 32,
-      "share_of_top100_pct": 0.42,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 27022,
+      "daily_peak": 59140,
+      "last_week_rank": 27,
+      "share_of_top100_pct": 0.69,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 35,
       "app_id": 550,
       "name": "Left 4 Dead 2",
       "publisher_group": "Other",
-      "current_players": 21174,
-      "daily_peak": 27171,
-      "last_week_rank": 36,
-      "share_of_top100_pct": 0.58,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 13764,
+      "daily_peak": 27579,
+      "last_week_rank": 35,
+      "share_of_top100_pct": 0.35,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 36,
-      "app_id": 4348910,
-      "name": "Probably Stolen - Cyberpunk Shopkeeper Sim",
-      "publisher_group": "Other",
-      "current_players": 16530,
-      "daily_peak": 73941,
-      "last_week_rank": 27,
-      "share_of_top100_pct": 0.45,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 37,
       "app_id": 3241660,
       "name": "R.E.P.O.",
       "publisher_group": "Other",
-      "current_players": 13441,
-      "daily_peak": 30190,
+      "current_players": 10367,
+      "daily_peak": 29887,
       "last_week_rank": 31,
-      "share_of_top100_pct": 0.37,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.26,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
-      "rank": 38,
+      "rank": 37,
       "app_id": 4080220,
       "name": "EA SPORTS FC\u2122 27",
       "publisher_group": "Other",
-      "current_players": 28218,
-      "daily_peak": 49874,
+      "current_players": 16253,
+      "daily_peak": 50432,
       "last_week_rank": 45,
-      "share_of_top100_pct": 0.77,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.41,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 38,
+      "app_id": 4348910,
+      "name": "Probably Stolen - Cyberpunk Shopkeeper Sim",
+      "publisher_group": "Other",
+      "current_players": 41234,
+      "daily_peak": 69349,
+      "last_week_rank": 28,
+      "share_of_top100_pct": 1.05,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 39,
       "app_id": 322330,
       "name": "Don't Starve Together",
       "publisher_group": "Other",
-      "current_players": 9310,
-      "daily_peak": 47427,
+      "current_players": 28289,
+      "daily_peak": 48315,
       "last_week_rank": 39,
-      "share_of_top100_pct": 0.25,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.72,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 40,
       "app_id": 1203220,
       "name": "NARAKA: BLADEPOINT",
       "publisher_group": "Other",
-      "current_players": 4160,
-      "daily_peak": 60254,
+      "current_players": 24369,
+      "daily_peak": 62070,
       "last_week_rank": 42,
-      "share_of_top100_pct": 0.11,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.62,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 41,
-      "app_id": 1808500,
-      "name": "ARC Raiders",
+      "app_id": 284160,
+      "name": "BeamNG.drive",
       "publisher_group": "Other",
-      "current_players": 29779,
-      "daily_peak": 43735,
-      "last_week_rank": 43,
-      "share_of_top100_pct": 0.81,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 10725,
+      "daily_peak": 27951,
+      "last_week_rank": 41,
+      "share_of_top100_pct": 0.27,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 42,
       "app_id": 394360,
       "name": "Hearts of Iron IV",
       "publisher_group": "Other",
-      "current_players": 19855,
-      "daily_peak": 40043,
-      "last_week_rank": 44,
-      "share_of_top100_pct": 0.54,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 23199,
+      "daily_peak": 40472,
+      "last_week_rank": 40,
+      "share_of_top100_pct": 0.59,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 43,
-      "app_id": 284160,
-      "name": "BeamNG.drive",
+      "app_id": 1808500,
+      "name": "ARC Raiders",
       "publisher_group": "Other",
-      "current_players": 15970,
-      "daily_peak": 26380,
-      "last_week_rank": 37,
-      "share_of_top100_pct": 0.43,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 19269,
+      "daily_peak": 43778,
+      "last_week_rank": 46,
+      "share_of_top100_pct": 0.49,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 44,
       "app_id": 1086940,
       "name": "Baldur's Gate 3",
       "publisher_group": "Other",
-      "current_players": 28953,
-      "daily_peak": 40680,
-      "last_week_rank": 50,
-      "share_of_top100_pct": 0.79,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 21655,
+      "daily_peak": 40844,
+      "last_week_rank": 49,
+      "share_of_top100_pct": 0.55,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 45,
       "app_id": 108600,
       "name": "Project Zomboid",
       "publisher_group": "Other",
-      "current_players": 26304,
-      "daily_peak": 34221,
-      "last_week_rank": 41,
-      "share_of_top100_pct": 0.71,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 20816,
+      "daily_peak": 34376,
+      "last_week_rank": 43,
+      "share_of_top100_pct": 0.53,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 46,
-      "app_id": 1449850,
-      "name": "Yu-Gi-Oh! Master Duel",
-      "publisher_group": "Other",
-      "current_players": 7925,
-      "daily_peak": 19482,
-      "last_week_rank": 57,
-      "share_of_top100_pct": 0.22,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 47,
-      "app_id": 238960,
-      "name": "Path of Exile",
-      "publisher_group": "Other",
-      "current_players": 36710,
-      "daily_peak": 62256,
-      "last_week_rank": 38,
-      "share_of_top100_pct": 1.0,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 48,
       "app_id": 489830,
       "name": "The Elder Scrolls V: Skyrim Special Edition",
       "publisher_group": "Other",
-      "current_players": 26559,
-      "daily_peak": 33287,
-      "last_week_rank": 46,
-      "share_of_top100_pct": 0.72,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 17375,
+      "daily_peak": 33146,
+      "last_week_rank": 47,
+      "share_of_top100_pct": 0.44,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 47,
+      "app_id": 252950,
+      "name": "Rocket League\u00ae",
+      "publisher_group": "Other",
+      "current_players": 7198,
+      "daily_peak": 24595,
+      "last_week_rank": 50,
+      "share_of_top100_pct": 0.18,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 48,
+      "app_id": 1449850,
+      "name": "Yu-Gi-Oh! Master Duel",
+      "publisher_group": "Other",
+      "current_players": 11964,
+      "daily_peak": 18263,
+      "last_week_rank": 55,
+      "share_of_top100_pct": 0.31,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 49,
       "app_id": 892970,
       "name": "Valheim",
       "publisher_group": "Other",
-      "current_players": 24564,
-      "daily_peak": 41956,
+      "current_players": 14609,
+      "daily_peak": 41510,
       "last_week_rank": 48,
-      "share_of_top100_pct": 0.67,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.37,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 50,
-      "app_id": 252950,
-      "name": "Rocket League\u00ae",
-      "publisher_group": "Other",
-      "current_players": 16863,
-      "daily_peak": 25167,
-      "last_week_rank": 47,
-      "share_of_top100_pct": 0.46,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 51,
       "app_id": 4000,
       "name": "Garry's Mod",
       "publisher_group": "Other",
-      "current_players": 18459,
-      "daily_peak": 28210,
-      "last_week_rank": 56,
-      "share_of_top100_pct": 0.5,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 14784,
+      "daily_peak": 28552,
+      "last_week_rank": 58,
+      "share_of_top100_pct": 0.38,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 51,
+      "app_id": 238960,
+      "name": "Path of Exile",
+      "publisher_group": "Other",
+      "current_players": 27942,
+      "daily_peak": 57780,
+      "last_week_rank": 38,
+      "share_of_top100_pct": 0.71,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 52,
-      "app_id": 1222670,
-      "name": "The Sims\u2122 4",
+      "app_id": 2483190,
+      "name": "Forza Horizon 6",
       "publisher_group": "Other",
-      "current_players": 22649,
-      "daily_peak": 30098,
-      "last_week_rank": 64,
-      "share_of_top100_pct": 0.62,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 10399,
+      "daily_peak": 24589,
+      "last_week_rank": 62,
+      "share_of_top100_pct": 0.27,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 53,
       "app_id": 1665460,
       "name": "eFootball\u2122",
       "publisher_group": "Other",
-      "current_players": 16128,
-      "daily_peak": 16825,
-      "last_week_rank": 55,
-      "share_of_top100_pct": 0.44,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 9643,
+      "daily_peak": 22614,
+      "last_week_rank": 51,
+      "share_of_top100_pct": 0.25,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 54,
-      "app_id": 3405690,
-      "name": "EA Sports FC 26",
-      "publisher_group": "Competitor",
-      "current_players": 14883,
-      "daily_peak": 21622,
-      "last_week_rank": 53,
+      "app_id": 1222670,
+      "name": "The Sims\u2122 4",
+      "publisher_group": "Other",
+      "current_players": 15820,
+      "daily_peak": 29187,
+      "last_week_rank": 63,
       "share_of_top100_pct": 0.4,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 55,
-      "app_id": 4530370,
-      "name": "Football Manager 27",
-      "publisher_group": "Other",
-      "current_players": 32227,
-      "daily_peak": 57605,
-      "last_week_rank": 51,
-      "share_of_top100_pct": 0.88,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "app_id": 3405690,
+      "name": "EA Sports FC 26",
+      "publisher_group": "Competitor",
+      "current_players": 9491,
+      "daily_peak": 21529,
+      "last_week_rank": 53,
+      "share_of_top100_pct": 0.24,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 56,
-      "app_id": 292030,
-      "name": "The Witcher 3: Wild Hunt \u2014 Remastered",
-      "publisher_group": "Other",
-      "current_players": 13321,
-      "daily_peak": 26666,
-      "last_week_rank": 58,
-      "share_of_top100_pct": 0.36,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 57,
       "app_id": 4126040,
       "name": "Aniimo",
       "publisher_group": "Other",
-      "current_players": 18651,
-      "daily_peak": 20898,
+      "current_players": 15587,
+      "daily_peak": 26013,
       "last_week_rank": 52,
-      "share_of_top100_pct": 0.51,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.4,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 57,
+      "app_id": 292030,
+      "name": "The Witcher 3: Wild Hunt \u2014 Remastered",
+      "publisher_group": "Other",
+      "current_players": 12184,
+      "daily_peak": 25070,
+      "last_week_rank": 57,
+      "share_of_top100_pct": 0.31,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 58,
       "app_id": 1905180,
       "name": "OBS Studio",
       "publisher_group": "Other",
-      "current_players": 14275,
-      "daily_peak": 30559,
-      "last_week_rank": 59,
-      "share_of_top100_pct": 0.39,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 17591,
+      "daily_peak": 30236,
+      "last_week_rank": 56,
+      "share_of_top100_pct": 0.45,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 59,
-      "app_id": 1426210,
-      "name": "It Takes Two",
+      "app_id": 4530370,
+      "name": "Football Manager 27",
       "publisher_group": "Other",
-      "current_players": 3653,
-      "daily_peak": 51652,
-      "last_week_rank": 188,
-      "share_of_top100_pct": 0.1,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 26471,
+      "daily_peak": 56646,
+      "last_week_rank": 59,
+      "share_of_top100_pct": 0.68,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 60,
-      "app_id": 2483190,
-      "name": "Forza Horizon 6",
-      "publisher_group": "Other",
-      "current_players": 9403,
-      "daily_peak": 17381,
-      "last_week_rank": 69,
-      "share_of_top100_pct": 0.26,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 61,
       "app_id": 3419430,
       "name": "Bongo Cat",
       "publisher_group": "Other",
-      "current_players": 168073,
-      "daily_peak": 152628,
+      "current_players": 182398,
+      "daily_peak": 198355,
       "last_week_rank": 54,
-      "share_of_top100_pct": 4.56,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 4.66,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 61,
+      "app_id": 1426210,
+      "name": "It Takes Two",
+      "publisher_group": "Other",
+      "current_players": 14831,
+      "daily_peak": 50843,
+      "last_week_rank": 180,
+      "share_of_top100_pct": 0.38,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 62,
       "app_id": 1245620,
       "name": "ELDEN RING",
       "publisher_group": "Other",
-      "current_players": 14878,
-      "daily_peak": 25613,
-      "last_week_rank": 67,
-      "share_of_top100_pct": 0.4,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 15063,
+      "daily_peak": 25800,
+      "last_week_rank": 69,
+      "share_of_top100_pct": 0.38,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 63,
       "app_id": 1364780,
       "name": "Street Fighter\u2122 6",
       "publisher_group": "Other",
-      "current_players": 5438,
-      "daily_peak": 27515,
+      "current_players": 12786,
+      "daily_peak": 27724,
       "last_week_rank": 65,
-      "share_of_top100_pct": 0.15,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.33,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 64,
       "app_id": 291550,
       "name": "Brawlhalla",
       "publisher_group": "Other",
-      "current_players": 11498,
-      "daily_peak": 13242,
-      "last_week_rank": 71,
-      "share_of_top100_pct": 0.31,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 5500,
+      "daily_peak": 13406,
+      "last_week_rank": 66,
+      "share_of_top100_pct": 0.14,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 65,
       "app_id": 289070,
       "name": "Sid Meier's Civilization VI",
       "publisher_group": "Take-Two",
-      "current_players": 17502,
-      "daily_peak": 33431,
-      "last_week_rank": 75,
-      "share_of_top100_pct": 0.48,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 21968,
+      "daily_peak": 34171,
+      "last_week_rank": 73,
+      "share_of_top100_pct": 0.56,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 66,
-      "app_id": 1142710,
-      "name": "Total War: WARHAMMER III",
-      "publisher_group": "Other",
-      "current_players": 17382,
-      "daily_peak": 28186,
-      "last_week_rank": 66,
-      "share_of_top100_pct": 0.47,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 67,
       "app_id": 3678970,
       "name": "TBH: Task Bar Hero",
       "publisher_group": "Other",
-      "current_players": 42776,
-      "daily_peak": 66288,
+      "current_players": 53923,
+      "daily_peak": 65883,
       "last_week_rank": 61,
-      "share_of_top100_pct": 1.16,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 1.38,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 67,
+      "app_id": 1142710,
+      "name": "Total War: WARHAMMER III",
+      "publisher_group": "Other",
+      "current_players": 15941,
+      "daily_peak": 28065,
+      "last_week_rank": 68,
+      "share_of_top100_pct": 0.41,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 68,
       "app_id": 1366800,
       "name": "Crosshair X",
       "publisher_group": "Other",
-      "current_players": 30212,
-      "daily_peak": 42221,
-      "last_week_rank": 60,
-      "share_of_top100_pct": 0.82,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 24711,
+      "daily_peak": 41571,
+      "last_week_rank": 64,
+      "share_of_top100_pct": 0.63,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 69,
       "app_id": 1281930,
       "name": "tModLoader",
       "publisher_group": "Other",
-      "current_players": 9797,
-      "daily_peak": 23773,
-      "last_week_rank": 80,
-      "share_of_top100_pct": 0.27,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 14019,
+      "daily_peak": 22492,
+      "last_week_rank": 76,
+      "share_of_top100_pct": 0.36,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 70,
       "app_id": 1329410,
       "name": "App 1329410",
       "publisher_group": "Other",
-      "current_players": 1944,
-      "daily_peak": 16564,
-      "last_week_rank": 63,
-      "share_of_top100_pct": 0.05,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 8501,
+      "daily_peak": 15755,
+      "last_week_rank": 44,
+      "share_of_top100_pct": 0.22,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 71,
-      "app_id": 739630,
-      "name": "Phasmophobia",
+      "app_id": 2183900,
+      "name": "Warhammer 40,000: Space Marine 2",
       "publisher_group": "Other",
-      "current_players": 6988,
-      "daily_peak": 14137,
-      "last_week_rank": 97,
-      "share_of_top100_pct": 0.19,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 11201,
+      "daily_peak": 19544,
+      "last_week_rank": 103,
+      "share_of_top100_pct": 0.29,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 72,
-      "app_id": 1203620,
-      "name": "Enshrouded",
+      "app_id": 3527290,
+      "name": "PEAK",
       "publisher_group": "Other",
-      "current_players": 19597,
-      "daily_peak": 34494,
-      "last_week_rank": 62,
-      "share_of_top100_pct": 0.53,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 6473,
+      "daily_peak": 14582,
+      "last_week_rank": 71,
+      "share_of_top100_pct": 0.17,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 73,
-      "app_id": 3513350,
-      "name": "Wuthering Waves",
+      "app_id": 244210,
+      "name": "Assetto Corsa",
       "publisher_group": "Other",
-      "current_players": 4630,
-      "daily_peak": 9123,
-      "last_week_rank": 73,
-      "share_of_top100_pct": 0.13,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 4836,
+      "daily_peak": 14405,
+      "last_week_rank": 83,
+      "share_of_top100_pct": 0.12,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 74,
-      "app_id": 1623730,
-      "name": "Palworld",
+      "app_id": 1203620,
+      "name": "Enshrouded",
       "publisher_group": "Other",
-      "current_players": 15696,
-      "daily_peak": 32199,
-      "last_week_rank": 79,
-      "share_of_top100_pct": 0.43,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 12090,
+      "daily_peak": 33543,
+      "last_week_rank": 67,
+      "share_of_top100_pct": 0.31,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 75,
       "app_id": 2300320,
       "name": "Farming Simulator 25",
       "publisher_group": "Other",
-      "current_players": 15664,
-      "daily_peak": 37600,
-      "last_week_rank": 70,
-      "share_of_top100_pct": 0.43,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 11576,
+      "daily_peak": 37676,
+      "last_week_rank": 72,
+      "share_of_top100_pct": 0.3,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 76,
-      "app_id": 1942280,
-      "name": "Brotato",
+      "app_id": 3513350,
+      "name": "Wuthering Waves",
       "publisher_group": "Other",
-      "current_players": 5817,
-      "daily_peak": 19847,
-      "last_week_rank": 76,
-      "share_of_top100_pct": 0.16,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 4648,
+      "daily_peak": 7911,
+      "last_week_rank": 70,
+      "share_of_top100_pct": 0.12,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 77,
-      "app_id": 3527290,
-      "name": "PEAK",
+      "app_id": 1623730,
+      "name": "Palworld",
       "publisher_group": "Other",
-      "current_players": 7379,
-      "daily_peak": 14464,
-      "last_week_rank": 68,
-      "share_of_top100_pct": 0.2,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 19276,
+      "daily_peak": 31815,
+      "last_week_rank": 78,
+      "share_of_top100_pct": 0.49,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 78,
-      "app_id": 244210,
-      "name": "Assetto Corsa",
+      "app_id": 1942280,
+      "name": "Brotato",
       "publisher_group": "Other",
-      "current_players": 8110,
-      "daily_peak": 13353,
-      "last_week_rank": 84,
-      "share_of_top100_pct": 0.22,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 10771,
+      "daily_peak": 19367,
+      "last_week_rank": 75,
+      "share_of_top100_pct": 0.27,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 79,
-      "app_id": 3321460,
-      "name": "Crimson Desert Enhanced",
+      "app_id": 739630,
+      "name": "Phasmophobia",
       "publisher_group": "Other",
-      "current_players": 14268,
-      "daily_peak": 24984,
-      "last_week_rank": 83,
-      "share_of_top100_pct": 0.39,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 4495,
+      "daily_peak": 13224,
+      "last_week_rank": 99,
+      "share_of_top100_pct": 0.11,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 80,
       "app_id": 221100,
       "name": "DayZ",
       "publisher_group": "Other",
-      "current_players": 22233,
-      "daily_peak": 39415,
-      "last_week_rank": 77,
-      "share_of_top100_pct": 0.6,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 17625,
+      "daily_peak": 39104,
+      "last_week_rank": 79,
+      "share_of_top100_pct": 0.45,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 81,
-      "app_id": 813780,
-      "name": "Age of Empires II: Definitive Edition",
-      "publisher_group": "Other",
-      "current_players": 14063,
-      "daily_peak": 19598,
-      "last_week_rank": 85,
-      "share_of_top100_pct": 0.38,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 82,
       "app_id": 261550,
       "name": "Mount & Blade II: Bannerlord",
       "publisher_group": "Other",
-      "current_players": 12766,
-      "daily_peak": 27208,
-      "last_week_rank": 81,
-      "share_of_top100_pct": 0.35,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 15970,
+      "daily_peak": 27476,
+      "last_week_rank": 80,
+      "share_of_top100_pct": 0.41,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 82,
+      "app_id": 3321460,
+      "name": "Crimson Desert Enhanced",
+      "publisher_group": "Other",
+      "current_players": 14239,
+      "daily_peak": 25059,
+      "last_week_rank": 82,
+      "share_of_top100_pct": 0.36,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 83,
-      "app_id": 294100,
-      "name": "RimWorld",
+      "app_id": 813780,
+      "name": "Age of Empires II: Definitive Edition",
       "publisher_group": "Other",
-      "current_players": 18011,
-      "daily_peak": 28254,
-      "last_week_rank": 82,
-      "share_of_top100_pct": 0.49,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 10638,
+      "daily_peak": 19671,
+      "last_week_rank": 84,
+      "share_of_top100_pct": 0.27,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 84,
-      "app_id": 1158310,
-      "name": "Crusader Kings III",
-      "publisher_group": "Other",
-      "current_players": 15601,
-      "daily_peak": 23257,
-      "last_week_rank": 72,
-      "share_of_top100_pct": 0.42,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 85,
       "app_id": 4162040,
       "name": "Zenless Zone Zero",
       "publisher_group": "Other",
-      "current_players": 5369,
-      "daily_peak": 7424,
-      "last_week_rank": 94,
-      "share_of_top100_pct": 0.15,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 5231,
+      "daily_peak": 7707,
+      "last_week_rank": 93,
+      "share_of_top100_pct": 0.13,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 85,
+      "app_id": 294100,
+      "name": "RimWorld",
+      "publisher_group": "Other",
+      "current_players": 19693,
+      "daily_peak": 28358,
+      "last_week_rank": 81,
+      "share_of_top100_pct": 0.5,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 86,
-      "app_id": 1085660,
-      "name": "Destiny 2",
-      "publisher_group": "Other",
-      "current_players": 16627,
-      "daily_peak": 21432,
-      "last_week_rank": 86,
-      "share_of_top100_pct": 0.45,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 87,
-      "app_id": 714010,
-      "name": "Aimlabs",
-      "publisher_group": "Other",
-      "current_players": 2195,
-      "daily_peak": 6208,
-      "last_week_rank": 90,
-      "share_of_top100_pct": 0.06,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 88,
       "app_id": 2073620,
       "name": "Arena Breakout: Infinite",
       "publisher_group": "Other",
-      "current_players": 13867,
-      "daily_peak": 25008,
+      "current_players": 11534,
+      "daily_peak": 25830,
+      "last_week_rank": 89,
+      "share_of_top100_pct": 0.29,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 87,
+      "app_id": 1158310,
+      "name": "Crusader Kings III",
+      "publisher_group": "Other",
+      "current_players": 13862,
+      "daily_peak": 22988,
+      "last_week_rank": 74,
+      "share_of_top100_pct": 0.35,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 88,
+      "app_id": 714010,
+      "name": "Aimlabs",
+      "publisher_group": "Other",
+      "current_players": 3966,
+      "daily_peak": 6178,
       "last_week_rank": 88,
-      "share_of_top100_pct": 0.38,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.1,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 89,
-      "app_id": 3932890,
-      "name": "Escape from Tarkov",
+      "app_id": 1085660,
+      "name": "Destiny 2",
       "publisher_group": "Other",
-      "current_players": 10045,
-      "daily_peak": 33765,
-      "last_week_rank": 96,
-      "share_of_top100_pct": 0.27,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 12063,
+      "daily_peak": 20850,
+      "last_week_rank": 87,
+      "share_of_top100_pct": 0.31,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 90,
       "app_id": 251570,
       "name": "7 Days to Die",
       "publisher_group": "Other",
-      "current_players": 13250,
-      "daily_peak": 23625,
+      "current_players": 12801,
+      "daily_peak": 24023,
       "last_week_rank": 91,
-      "share_of_top100_pct": 0.36,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "share_of_top100_pct": 0.33,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 91,
       "app_id": 2073850,
       "name": "THE FINALS",
       "publisher_group": "Other",
-      "current_players": 9684,
-      "daily_peak": 14562,
-      "last_week_rank": 87,
-      "share_of_top100_pct": 0.26,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 6336,
+      "daily_peak": 14901,
+      "last_week_rank": 90,
+      "share_of_top100_pct": 0.16,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 92,
       "app_id": 594650,
       "name": "Hunt: Showdown 1896",
       "publisher_group": "Other",
-      "current_players": 6972,
-      "daily_peak": 21536,
-      "last_week_rank": 93,
-      "share_of_top100_pct": 0.19,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 8722,
+      "daily_peak": 21023,
+      "last_week_rank": 94,
+      "share_of_top100_pct": 0.22,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 93,
-      "app_id": 2246340,
-      "name": "Monster Hunter Wilds",
+      "app_id": 3932890,
+      "name": "Escape from Tarkov",
       "publisher_group": "Other",
-      "current_players": 7197,
-      "daily_peak": 19652,
-      "last_week_rank": 95,
-      "share_of_top100_pct": 0.2,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 18263,
+      "daily_peak": 32697,
+      "last_week_rank": 96,
+      "share_of_top100_pct": 0.47,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 94,
-      "app_id": 2183900,
-      "name": "Warhammer 40,000: Space Marine 2",
-      "publisher_group": "Other",
-      "current_players": 12094,
-      "daily_peak": 12835,
-      "last_week_rank": 101,
-      "share_of_top100_pct": 0.33,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
-    },
-    {
-      "rank": 95,
       "app_id": 1551360,
       "name": "Forza Horizon 5",
       "publisher_group": "Other",
-      "current_players": 3407,
-      "daily_peak": 14027,
-      "last_week_rank": 137,
-      "share_of_top100_pct": 0.09,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 7409,
+      "daily_peak": 14357,
+      "last_week_rank": 127,
+      "share_of_top100_pct": 0.19,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
+    },
+    {
+      "rank": 95,
+      "app_id": 2246340,
+      "name": "Monster Hunter Wilds",
+      "publisher_group": "Other",
+      "current_players": 9206,
+      "daily_peak": 19165,
+      "last_week_rank": 95,
+      "share_of_top100_pct": 0.24,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 96,
       "app_id": 1771300,
       "name": "Kingdom Come: Deliverance II",
       "publisher_group": "Other",
-      "current_players": 10114,
-      "daily_peak": 23408,
-      "last_week_rank": 114,
-      "share_of_top100_pct": 0.27,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 13030,
+      "daily_peak": 23461,
+      "last_week_rank": 107,
+      "share_of_top100_pct": 0.33,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 97,
-      "app_id": 12210,
-      "name": "Grand Theft Auto IV: The Complete Edition",
+      "app_id": 960090,
+      "name": "Bloons TD 6",
       "publisher_group": "Other",
-      "current_players": 7405,
-      "daily_peak": 11331,
-      "last_week_rank": 123,
-      "share_of_top100_pct": 0.2,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 5614,
+      "daily_peak": 7849,
+      "last_week_rank": 105,
+      "share_of_top100_pct": 0.14,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 98,
-      "app_id": 365670,
-      "name": "Blender",
+      "app_id": 12210,
+      "name": "Grand Theft Auto IV: The Complete Edition",
       "publisher_group": "Other",
-      "current_players": 10753,
-      "daily_peak": 16748,
-      "last_week_rank": 98,
-      "share_of_top100_pct": 0.29,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 4696,
+      "daily_peak": 11012,
+      "last_week_rank": 109,
+      "share_of_top100_pct": 0.12,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 99,
-      "app_id": 2379780,
-      "name": "Balatro",
+      "app_id": 4356430,
+      "name": "NBA 2K27",
       "publisher_group": "Other",
-      "current_players": 5808,
-      "daily_peak": 7192,
-      "last_week_rank": 100,
-      "share_of_top100_pct": 0.16,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 11153,
+      "daily_peak": 19802,
+      "last_week_rank": 104,
+      "share_of_top100_pct": 0.28,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     },
     {
       "rank": 100,
-      "app_id": 3224770,
-      "name": "Umamusume: Pretty Derby",
+      "app_id": 2379780,
+      "name": "Balatro",
       "publisher_group": "Other",
-      "current_players": 5660,
-      "daily_peak": 7369,
-      "last_week_rank": 116,
-      "share_of_top100_pct": 0.15,
-      "captured_at": "2026-11-27T00:05:25.065274+00:00"
+      "current_players": 5149,
+      "daily_peak": 7209,
+      "last_week_rank": 100,
+      "share_of_top100_pct": 0.13,
+      "captured_at": "2026-11-27T08:17:17.090177+00:00"
     }
   ],
   "top100_share": [
@@ -6634,20 +6716,20 @@
     {
       "snapshot_date": "2026-11-27",
       "publisher_group": "Competitor",
-      "avg_players": 139002.0,
-      "share_pct": 3.78
+      "avg_players": 125957.0,
+      "share_pct": 3.3
     },
     {
       "snapshot_date": "2026-11-27",
       "publisher_group": "Other",
-      "avg_players": 3389800.0,
-      "share_pct": 92.07
+      "avg_players": 3519107.0,
+      "share_pct": 92.22
     },
     {
       "snapshot_date": "2026-11-27",
       "publisher_group": "Take-Two",
-      "avg_players": 153040.0,
-      "share_pct": 4.16
+      "avg_players": 171010.0,
+      "share_pct": 4.48
     }
   ],
   "review_themes": [
